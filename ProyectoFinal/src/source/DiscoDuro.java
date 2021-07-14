@@ -1,5 +1,7 @@
 package source;
 
+import exception.NotNegativeNumberExeption;
+
 public class DiscoDuro extends Componente {
 	 private String modelo;
 	 private int capaAlmacenamiento;
@@ -12,5 +14,34 @@ public class DiscoDuro extends Componente {
 		this.capaAlmacenamiento = capaAlmacenamiento;
 		this.tipoDeConexion = tipoDeConexion;
 	}
+
+	public String getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
+	}
+
+	public int getCapaAlmacenamiento() {
+		return capaAlmacenamiento;
+	}
+
+	public void setCapaAlmacenamiento(int capaAlmacenamiento) throws NotNegativeNumberExeption {
+		if(capaAlmacenamiento>0) {
+			this.capaAlmacenamiento = capaAlmacenamiento;
+		}else {
+			throw new NotNegativeNumberExeption("La capacidad de almacenamiento no puede ser negativa");
+		}
+	}
+
+	public String getTipoDeConexion() {
+		return tipoDeConexion;
+	}
+
+	public void setTipoDeConexion(String tipoDeConexion) {
+		this.tipoDeConexion = tipoDeConexion;
+	}
+	
 	 
 }

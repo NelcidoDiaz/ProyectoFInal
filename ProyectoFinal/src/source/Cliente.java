@@ -1,5 +1,7 @@
 package source;
 
+import exception.NotNegativeNumberExeption;
+
 public class Cliente {
 	private String nombre;
 	private String apellido;
@@ -62,8 +64,12 @@ public class Cliente {
 		return credito;
 	}
 
-	public void setCredito(int credito) {
-		this.credito = credito;
+	public void setCredito(int credito) throws NotNegativeNumberExeption {
+		if(credito>0) {
+			this.credito = credito;
+		}else {
+			throw new NotNegativeNumberExeption("EL credito no puede ser negativo");
+		}
 	}
 	
 	

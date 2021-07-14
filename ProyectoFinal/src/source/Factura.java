@@ -3,6 +3,8 @@ package source;
 import java.util.ArrayList;
 import java.util.Date;
 
+import exception.NotNegativeNumberExeption;
+
 public class Factura {
 	private Cliente cliente;
 	private float total;
@@ -29,8 +31,12 @@ public class Factura {
 		return total;
 	}
 
-	public void setTotal(float total) {
-		this.total = total;
+	public void setTotal(float total)throws NotNegativeNumberExeption {
+		if(total>0) {
+			this.total = total;
+		}else {
+			throw new NotNegativeNumberExeption("El total no puede ser negativo");
+		}
 	}
 
 	public Date getFecha() {

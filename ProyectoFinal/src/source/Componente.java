@@ -1,5 +1,7 @@
 package source;
 
+import exception.NotNegativeNumberExeption;
+
 public abstract class Componente {
 	 protected String marca;
 	 protected float precio;
@@ -20,5 +22,82 @@ public abstract class Componente {
 		this.cantMin = cantMin;
 		this.cantMax = cantMax;
 	}
+
+	public String getMarca() {
+		return marca;
+	}
+
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+
+	public float getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(float precio)throws NotNegativeNumberExeption {
+		if(precio>0) {
+			this.precio = precio;
+		}else {
+			throw new NotNegativeNumberExeption("Cantidad no puede ser negativa");
+		}
+	}
+
+	public String getNumeroDeSerie() {
+		return numeroDeSerie;
+	}
+
+	public void setNumeroDeSerie(String numeroDeSerie) {
+		this.numeroDeSerie = numeroDeSerie;
+	}
+
+	public float getDescuento() {
+		return descuento;
+	}
+
+	public void setDescuento(float descuento)throws NotNegativeNumberExeption {
+		if(descuento>0) {
+			this.descuento = descuento;
+		}else {
+			throw new NotNegativeNumberExeption("EL descuento no puede ser negativo");
+		}
+	}
+
+	public int getCantReal() {
+		return cantReal;
+	}
+
+	public void setCantReal(int cantReal)throws NotNegativeNumberExeption {
+		if(cantMax>0) {
+			this.cantReal = cantReal;
+		}else {
+			throw new NotNegativeNumberExeption("Cantidad no puede ser negativa");
+		}
+	}
+
+	public int getCantMin() {
+		return cantMin;
+	}
+
+	public void setCantMin(int cantMin)throws NotNegativeNumberExeption {
+		if(cantMin>0) {
+			this.cantMin = cantMin;
+		}else {
+			throw new NotNegativeNumberExeption("Cantidad no puede ser negativa");
+		}
+	}
+
+	public int getCantMax() {
+		return cantMax;
+	}
+
+	public void setCantMax(int cantMax) throws NotNegativeNumberExeption{
+		if(cantMax>0) {
+			this.cantMax = cantMax;
+		}else {
+			throw new NotNegativeNumberExeption("Cantidad no puede ser negativa");
+		}
+	}
+	
 	 
 }

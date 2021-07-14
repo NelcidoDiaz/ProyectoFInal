@@ -1,5 +1,7 @@
 package source;
 
+import exception.NotNegativeNumberExeption;
+
 public class OrdenCompra {
 	private String id;
 	private Componente componentes;
@@ -34,8 +36,12 @@ public class OrdenCompra {
 		return cant;
 	}
 
-	public void setCant(int cant) {
-		this.cant = cant;
+	public void setCant(int cant) throws NotNegativeNumberExeption {
+		if(cant>0) {
+			this.cant = cant;
+		}else {
+			throw new NotNegativeNumberExeption("Cantidad no puede ser negativa");
+		}
 	}
 
 	public String getDistribuidor() {
