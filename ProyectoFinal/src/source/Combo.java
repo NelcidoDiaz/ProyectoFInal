@@ -40,7 +40,7 @@ public class Combo {
 		this.descuento = descuento;
 	}
 	
-	private float calcValComb() {
+	public float calcValComb() {
 		float combo = 0;
 		combo = calcPrecioTotal() - calcPrecioTotal()*descuento;
 		return combo;

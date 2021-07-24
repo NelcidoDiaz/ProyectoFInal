@@ -5,14 +5,17 @@ import java.util.ArrayList;
 public class Controladora {
 	private ArrayList<Componente> misComponentes;
 	private ArrayList<Factura> misFacturas;
-	private Cliente [] misClientes;
+	private ArrayList<Cliente> misClientes;
+	private ArrayList<Combo> misCombos;
 	private ArrayList<OrdenCompra> ordenCompra;
+	
 	
 	public Controladora() {
 		super();
 		misComponentes = new ArrayList<Componente>();
 		misFacturas = new ArrayList<Factura>();
-		misClientes = new Cliente[100];
+		misClientes = new ArrayList<Cliente>();
+		misCombos = new ArrayList<Combo>();
 		ordenCompra = new ArrayList<OrdenCompra>();
 	}
 	
@@ -32,12 +35,20 @@ public class Controladora {
 		this.misFacturas = misFacturas;
 	}
 
-	public Cliente[] getMisClientes() {
+	public ArrayList<Cliente> getMisClientes() {
 		return misClientes;
 	}
 
-	public void setMisClientes(Cliente[] misClientes) {
+	public void setMisClientes(ArrayList<Cliente>  misClientes) {
 		this.misClientes = misClientes;
+	}
+
+	public ArrayList<Combo> getMisCombos() {
+		return misCombos;
+	}
+
+	public void setMisCombos(ArrayList<Combo> misCombos) {
+		this.misCombos = misCombos;
 	}
 
 	public ArrayList<OrdenCompra> getOrdenCompra() {
@@ -46,6 +57,57 @@ public class Controladora {
 
 	public void setOrdenCompra(ArrayList<OrdenCompra> ordenCompra) {
 		this.ordenCompra = ordenCompra;
+	}
+	
+	public void insertarComponente(Componente compo ) {
+		misComponentes.add(compo);
+	}
+	
+	public void insertarFactura(Factura factura) {
+		misFacturas.add(factura);
+		disminuirCompInsideFactura(factura);
+	}
+	
+	// Esta función se encarga de restar la cantreal de los componentes del almacen si estos se encuentran en factura.
+	private void disminuirCompInsideFactura(Factura factura) {
+		boolean existe = false;
+		int j = 0;
+		for(int i = 0; i < factura.getComponentes().size(); i++) {
+			enctCompFact(factura.getComponentes().get(i).numeroDeSerie);
+		}
+	}
+	
+	// Esta función se encarga de comparar el numSerie del componente con el que esta en almacen y si esto 
+	// se cumple le resta la cantreal al componente del almacen.
+	private void enctCompFact(String numSerie) {
+		boolean existe = false;
+		int i = 0;
+		while(!existe && i < misComponentes.size()) {
+			if(misComponentes.get(i).getNumeroDeSerie().equalsIgnoreCase(numSerie)) {
+				existe = true;
+				misComponentes.get(i).cantReal=-1;
+			}
+			i++;
+		}
+	}
+
+	public void insertarCliente(Cliente cliente) {
+		misClientes.add(cliente);
+	}
+	
+	public void insertarCombo(Combo combo) {
+		misCombos.add(combo);
+	}
+	
+	public boolean hacerPedido(String numSerie) {
+		boolean pedido = false;
+		Componente componentes = buscComponente(numSerie);
+		if(componentes!=null) {
+			if(componentes.cantReal < componentes.cantMin) {
+				pedido = true;
+			}
+		}
+		return pedido;
 	}
 
 	public Componente buscComponente(String numSerie) {
@@ -79,9 +141,9 @@ public class Controladora {
 		Cliente aux = null;
 		boolean existe = false;
 		int i = 0;
-		while(!existe&& i < misClientes.length) {
-			if(misClientes[i].getCedula().equalsIgnoreCase(cedula)) {
-				aux = misClientes[i];
+		while(!existe && i<misClientes.size()) {
+			if(misClientes.get(i).getCedula().equalsIgnoreCase(cedula)) {
+				aux = misClientes.get(i);
 				existe = true;
 			}
 			i++;
