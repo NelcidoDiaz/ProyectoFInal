@@ -8,7 +8,7 @@ public class Cliente {
 	private String cedula;
 	private String direccion;
 	private Factura misFacturas;
-	private int credito;
+	private float credito;
 	
 	public Cliente(String nombre, String apellido, String cedula, String direccion, Factura misFacturas, int credito) {
 		super();
@@ -60,11 +60,11 @@ public class Cliente {
 		this.misFacturas = misFacturas;
 	}
 
-	public int getCredito() {
+	public float getCredito() {
 		return credito;
 	}
 
-	public void setCredito(int credito) throws NotNegativeNumberExeption {
+	public void setCredito(float credito) throws NotNegativeNumberExeption {
 		if(credito>0) {
 			this.credito = credito;
 		}else {

@@ -68,16 +68,15 @@ public class Controladora {
 		disminuirCompInsideFactura(factura);
 	}
 	
-	// Esta función se encarga de restar la cantreal de los componentes del almacen si estos se encuentran en factura.
+	// Esta funciï¿½n se encarga de restar la cantreal de los componentes del almacen si estos se encuentran en factura.
 	private void disminuirCompInsideFactura(Factura factura) {
 		boolean existe = false;
-		int j = 0;
 		for(int i = 0; i < factura.getComponentes().size(); i++) {
 			enctCompFact(factura.getComponentes().get(i).numeroDeSerie);
 		}
 	}
 	
-	// Esta función se encarga de comparar el numSerie del componente con el que esta en almacen y si esto 
+	// Esta funciï¿½n se encarga de comparar el numSerie del componente con el que esta en almacen y si esto 
 	// se cumple le resta la cantreal al componente del almacen.
 	private void enctCompFact(String numSerie) {
 		boolean existe = false;
