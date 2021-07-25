@@ -5,7 +5,7 @@ import exception.NotNegativeNumberExeption;
 public class MemoriaRam extends Componente {
 	private int cantMemoria;
 	private String tipoMemoria;
-	
+
 	public MemoriaRam(String marca, float precio, String numeroDeSerie, float descuento, int cantReal, int cantMin,
 			int cantMax, int cantMemoria, String tipoMemoria) {
 		super(marca, precio, numeroDeSerie, descuento, cantReal, cantMin, cantMax);
@@ -17,11 +17,11 @@ public class MemoriaRam extends Componente {
 		return cantMemoria;
 	}
 
-	public void setCantMemoria(int cantMemoria)throws NotNegativeNumberExeption{
-		if(cantMemoria>0) {
+	public void setCantMemoria(int cantMemoria) throws NotNegativeNumberExeption {
+		if (cantMemoria > 0) {
 			this.cantMemoria = cantMemoria;
-		}else {
-			throw new NotNegativeNumberExeption("La cantidad de memoria no puede ser negativa");
+		} else {
+			throw new NotNegativeNumberExeption();
 		}
 	}
 
@@ -32,6 +32,5 @@ public class MemoriaRam extends Componente {
 	public void setTipoMemoria(String tipoMemoria) {
 		this.tipoMemoria = tipoMemoria;
 	}
-	
-	
+
 }

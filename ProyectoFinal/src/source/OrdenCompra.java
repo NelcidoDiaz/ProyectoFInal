@@ -7,7 +7,7 @@ public class OrdenCompra {
 	private Componente componentes;
 	private int cant;
 	private String distribuidor;
-	
+
 	public OrdenCompra(String id, Componente componentes, int cant, String distribuidor) {
 		super();
 		this.id = id;
@@ -37,10 +37,10 @@ public class OrdenCompra {
 	}
 
 	public void setCant(int cant) throws NotNegativeNumberExeption {
-		if(cant>0) {
+		if (cant > 0) {
 			this.cant = cant;
-		}else {
-			throw new NotNegativeNumberExeption("Cantidad no puede ser negativa");
+		} else {
+			throw new NotNegativeNumberExeption();
 		}
 	}
 

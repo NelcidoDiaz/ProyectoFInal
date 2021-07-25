@@ -39,7 +39,7 @@ public class MicroProcesador extends Componente {
 		if(velocProcs>0) {
 			this.velocProcs = velocProcs;
 		}else {
-			throw new NotNegativeNumberExeption("La velocidad del procesador no puede ser negativa");
+			throw new NotNegativeNumberExeption();
 		}
 	}
 	

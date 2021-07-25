@@ -44,6 +44,7 @@ public class ListarClientes extends JFrame {
 	 * Create the frame.
 	 */
 	public ListarClientes() {
+		setTitle("Clientes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1080, 684);
 		contentPane = new JPanel();

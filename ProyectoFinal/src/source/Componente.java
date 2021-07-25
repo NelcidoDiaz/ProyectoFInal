@@ -39,7 +39,7 @@ public abstract class Componente {
 		if(precio>0) {
 			this.precio = precio;
 		}else {
-			throw new NotNegativeNumberExeption("Cantidad no puede ser negativa");
+			throw new NotNegativeNumberExeption();
 		}
 	}
 
@@ -59,7 +59,7 @@ public abstract class Componente {
 		if(descuento>0) {
 			this.descuento = descuento;
 		}else {
-			throw new NotNegativeNumberExeption("EL descuento no puede ser negativo");
+			throw new NotNegativeNumberExeption();
 		}
 	}
 
@@ -71,7 +71,7 @@ public abstract class Componente {
 		if(cantMax>0) {
 			this.cantReal = cantReal;
 		}else {
-			throw new NotNegativeNumberExeption("Cantidad no puede ser negativa");
+			throw new NotNegativeNumberExeption();
 		}
 	}
 
@@ -83,7 +83,7 @@ public abstract class Componente {
 		if(cantMin>0) {
 			this.cantMin = cantMin;
 		}else {
-			throw new NotNegativeNumberExeption("Cantidad no puede ser negativa");
+			throw new NotNegativeNumberExeption();
 		}
 	}
 
@@ -95,7 +95,7 @@ public abstract class Componente {
 		if(cantMax>0) {
 			this.cantMax = cantMax;
 		}else {
-			throw new NotNegativeNumberExeption("Cantidad no puede ser negativa");
+			throw new NotNegativeNumberExeption();
 		}
 	}
 	

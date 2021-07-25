@@ -2,12 +2,9 @@ package exception;
 
 public class NotNegativeNumberExeption extends Exception {
 
-	public NotNegativeNumberExeption() {
-		// TODO Auto-generated constructor stub
-	}
 
-	public NotNegativeNumberExeption(String message) {
-		super(message);
+	public NotNegativeNumberExeption() {
+		super("Cantidad no puede ser negativa");
 		// TODO Auto-generated constructor stub
 	}
 

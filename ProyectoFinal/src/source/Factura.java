@@ -11,8 +11,9 @@ public class Factura {
 	private float total;
 	private Date fecha;
 	private ArrayList<Componente> Componentes;
-	
-	public Factura(String codFactura,Cliente cliente, float total, Date fecha, ArrayList<Componente> componentes) {
+	private ArrayList <Combo> Combos;
+
+	public Factura(String codFactura, Cliente cliente, float total, Date fecha, ArrayList<Componente> componentes) {
 		super();
 		this.codFactura = codFactura;
 		this.cliente = cliente;
@@ -41,11 +42,11 @@ public class Factura {
 		return total;
 	}
 
-	public void setTotal(float total)throws NotNegativeNumberExeption {
-		if(total>0) {
+	public void setTotal(float total) throws NotNegativeNumberExeption {
+		if (total > 0) {
 			this.total = total;
-		}else {
-			throw new NotNegativeNumberExeption("El total no puede ser negativo");
+		} else {
+			throw new NotNegativeNumberExeption();
 		}
 	}
 
@@ -64,6 +65,5 @@ public class Factura {
 	public void setComponentes(ArrayList<Componente> componentes) {
 		Componentes = componentes;
 	}
-	
-	
+
 }
