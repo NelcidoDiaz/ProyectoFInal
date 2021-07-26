@@ -1,11 +1,13 @@
 package source;
 
+import exception.NotNegativeNumberExeption;
+
 public class OrdenCompra {
 	private String id;
 	private Componente componentes;
 	private int cant;
 	private String distribuidor;
-	
+
 	public OrdenCompra(String id, Componente componentes, int cant, String distribuidor) {
 		super();
 		this.id = id;
@@ -34,8 +36,12 @@ public class OrdenCompra {
 		return cant;
 	}
 
-	public void setCant(int cant) {
-		this.cant = cant;
+	public void setCant(int cant) throws NotNegativeNumberExeption {
+		if (cant > 0) {
+			this.cant = cant;
+		} else {
+			throw new NotNegativeNumberExeption();
+		}
 	}
 
 	public String getDistribuidor() {
