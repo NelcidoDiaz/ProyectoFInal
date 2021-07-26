@@ -6,9 +6,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.Dimension;
 
-public class HacerPedidos extends JFrame {
+public class Factura extends JFrame {
 
 	private JPanel contentPane;
 
@@ -19,7 +18,7 @@ public class HacerPedidos extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HacerPedidos frame = new HacerPedidos();
+					Factura frame = new Factura();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -31,15 +30,12 @@ public class HacerPedidos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public HacerPedidos() {
-		setTitle("Hacer Pedido");
+	public Factura() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 638, 390);
 		contentPane = new JPanel();
-		contentPane.setMaximumSize(new Dimension(2147483647, 2147483647));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 	}
-
 }

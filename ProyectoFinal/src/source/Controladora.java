@@ -109,44 +109,32 @@ public class Controladora {
 	}
 
 	public Componente buscComponente(String numSerie) {
-		Componente aux = null;
-		boolean existe = false;
-		int i = 0;
-		while(!existe && i < misComponentes.size()){
-			if(misComponentes.get(i).getNumeroDeSerie().equalsIgnoreCase(numSerie)) {
-				aux = misComponentes.get(i);
-				existe = true;
-			}
+	  for(Componente componente : misComponentes) {
+		if(componente.getNumeroDeSerie().equalsIgnoreCase(numSerie)) {
+		 return componente;
 		}
-		return aux;
+	  }
+	  return null;
 	}
 
 	public Factura buscFactura(String codFac) {
-		Factura aux = null;
-		boolean existe  = false;
-		int i = 0;
-		while(!existe && i<misFacturas.size()) {
-			if(misFacturas.get(i).getCodFactura().equalsIgnoreCase(codFac)) {
-				aux = misFacturas.get(i);
-				existe = true;
-			}
-			i++;
-		}
-		return aux;
+		 for(Factura factura : misFacturas) {
+		  if(factura.getCodFactura().equalsIgnoreCase(codFac)) {
+			return factura;
+		  }
+		 }
+		 return null;
 	}
 	
 	public Cliente buscCliente(String cedula) {
-		Cliente aux = null;
-		boolean existe = false;
-		int i = 0;
-		while(!existe && i<misClientes.size()) {
-			if(misClientes.get(i).getCedula().equalsIgnoreCase(cedula)) {
-				aux = misClientes.get(i);
-				existe = true;
-			}
-			i++;
+		for(Cliente cliente : misClientes ) {
+		 if(cliente.getCedula().equalsIgnoreCase(cedula)) {
+			 return cliente;
+		 }
 		}
-		return aux;
+		return null;
+		
 	}
+		
 	
 }
