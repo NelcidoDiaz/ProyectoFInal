@@ -23,7 +23,7 @@ public class ListarClientes extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-
+ 
 	/**
 	 * Launch the application.
 	 */

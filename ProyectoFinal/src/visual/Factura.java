@@ -2,15 +2,36 @@ package visual;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import source.Componente;
+import source.Cliente;
 public class Factura extends JFrame {
 
 	private JPanel contentPane;
+	 
 
+	public static void getClientes() {
+
+	}
+
+	public static void getComponentes() {
+
+	}
+
+
+	public static void setClientes(ArrayList<Cliente> __misClientes) {
+
+	}
+
+	public static void setComponentes(ArrayList<Componente> __misComponentes) {
+
+	}
+ 
 	/**
 	 * Launch the application.
 	 */

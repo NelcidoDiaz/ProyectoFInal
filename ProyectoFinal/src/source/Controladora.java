@@ -79,13 +79,11 @@ public class Controladora {
 	// se cumple le resta la cantreal al componente del almacen.
 	private void enctCompFact(String numSerie) {
 		boolean existe = false;
-		int i = 0;
-		while(!existe && i < misComponentes.size()) {
-			if(misComponentes.get(i).getNumeroDeSerie().equalsIgnoreCase(numSerie)) {
+		for(Componente componente: misComponentes) {
+			if(componente.getNumeroDeSerie().equalsIgnoreCase(numSerie)) {
 				existe = true;
-				misComponentes.get(i).cantReal=-1;
+				componente.cantReal=-1;
 			}
-			i++;
 		}
 	}
 
@@ -97,7 +95,7 @@ public class Controladora {
 		misCombos.add(combo);
 	}
 	
-	public boolean hacerPedido(String numSerie) {
+	public boolean hacerPedido(String numSerie,int cantidad) {
 		boolean pedido = false;
 		Componente componentes = buscComponente(numSerie);
 		if(componentes!=null) {
@@ -135,6 +133,20 @@ public class Controladora {
 		return null;
 		
 	}
+	public void guardarEnFichero() {
 		
+	}
+	private void guardarClientes() {
+		
+	}
+	private void guardarFacturas() {
+		
+	}
+	private void guardarEmpleados() {
+		
+	}
+	private void guardarCombos() {
+		
+	}
 	
 }
