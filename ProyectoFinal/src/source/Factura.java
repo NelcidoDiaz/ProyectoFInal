@@ -12,6 +12,7 @@ public class Factura {
 	private Date fecha;
 	private ArrayList<Componente> Componentes;
 	private ArrayList <Combo> Combos;
+	private Fichero archivo;
 
 	public Factura(String codFactura, Cliente cliente, float total, Date fecha, ArrayList<Componente> componentes) {
 		super();
@@ -65,5 +66,7 @@ public class Factura {
 	public void setComponentes(ArrayList<Componente> componentes) {
 		Componentes = componentes;
 	}
-
+   public void guardar() {
+	   this.archivo = new Fichero("~/src/ficheros/facturas.txt");
+   }
 }
