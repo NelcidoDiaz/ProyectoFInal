@@ -68,22 +68,26 @@ public class Controladora {
 		disminuirCompInsideFactura(factura);
 	}
 	
-	// Esta funci�n se encarga de restar la cantreal de los componentes del almacen si estos se encuentran en factura.
+	public void insertarOrdenCompra(OrdenCompra compra) {
+		ordenCompra.add(compra);
+	}
+	
+	// Esta funcion se encarga de restar la cantreal de los componentes del almacen si estos se encuentran en factura.
 	private void disminuirCompInsideFactura(Factura factura) {
 		for(int i = 0; i < factura.getComponentes().size(); i++) {
-			enctCompFact(factura.getComponentes().get(i).numeroDeSerie);
+			enctCompFact(factura.getComponentes().get(i).numeroDeSerie,factura,i);
 		}
 	}
 	
-	// Esta funci�n se encarga de comparar el numSerie del componente con el que esta en almacen y si esto 
+	// Esta funcion se encarga de comparar el numSerie del componente con el que esta en almacen y si esto 
 	// se cumple le resta la cantreal al componente del almacen.
-	private void enctCompFact(String numSerie) {
+	private void enctCompFact(String numSerie, Factura factura, int j) {
 		boolean existe = false;
 		int i = 0;
 		while(!existe && i < misComponentes.size()) {
 			if(misComponentes.get(i).getNumeroDeSerie().equalsIgnoreCase(numSerie)) {
 				existe = true;
-				misComponentes.get(i).cantReal=-1;
+				misComponentes.get(i).cantReal -= factura.getComponentes().get(j).cantReal ;
 			}
 			i++;
 		}
@@ -95,6 +99,18 @@ public class Controladora {
 	
 	public void insertarCombo(Combo combo) {
 		misCombos.add(combo);
+	}
+	
+	public void aumentarCompInsideOrden(OrdenCompra compra, boolean aceptada) {
+		boolean existe = false;
+		int i = 0;
+		while(!existe && i < misComponentes.size()) {
+			if(misComponentes.get(i).getNumeroDeSerie().equalsIgnoreCase(compra.getComponentes().numeroDeSerie)) {
+				existe = true;
+				misComponentes.get(i).cantReal += 2*(misComponentes.get(i).cantMin);
+			}
+			i++;
+		}
 	}
 	
 	public boolean hacerPedido(String numSerie) {
