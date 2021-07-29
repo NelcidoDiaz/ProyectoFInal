@@ -11,7 +11,7 @@ public class Fondo extends JFrame {
 		Fondo f = new Fondo();
 		f.setSize(400,300);	
 		f.setVisible(true);
-	    Imagen imagen = new Imagen("/home/nelcido/Imágenes/Screenshot from 2021-07-24 09-28-49.png");
+	    Imagen imagen = new Imagen("/imagenes/amazon-icon.jpg");
 	    imagen.setBounds(1, 1, 70, 70);
 	    f.add(imagen);
 	    f.repaint();

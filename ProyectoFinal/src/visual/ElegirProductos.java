@@ -71,7 +71,7 @@ public class ElegirProductos extends JFrame {
 		label.setBounds(493, 263, 66, 15);
 		contentPane.add(label);
 		
-		 Imagen imagen = new Imagen("/amazon-icon.jpg");
+		 Imagen imagen = new Imagen("/imagenes/amazon-icon.jpg");
 		 imagen.setBounds(357, 12, 196, 82);
 		 contentPane.add(imagen);
 	}
