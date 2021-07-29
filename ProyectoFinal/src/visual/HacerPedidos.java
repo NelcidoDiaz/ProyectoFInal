@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JButton;
+import javax.swing.DefaultComboBoxModel;
 
 public class HacerPedidos extends JFrame {
 
@@ -107,6 +108,15 @@ public class HacerPedidos extends JFrame {
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(436, 24, 184, 24);
 		panel.add(comboBox);
+		
+		JLabel lblProducto = new JLabel("Producto");
+		lblProducto.setBounds(352, 86, 66, 15);
+		panel.add(lblProducto);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"--Por seleccionar--", "Micro Procesador", "Memoria Ram", "Tarjeta Madre", "Disco Duro"}));
+		comboBox_1.setBounds(436, 81, 184, 24);
+		panel.add(comboBox_1);
 		
 		tblElegidos = new JTable();
 		tblElegidos.setBounds(12, 207, 511, 206);
