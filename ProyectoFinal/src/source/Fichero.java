@@ -1,5 +1,6 @@
 package source;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -27,20 +28,30 @@ public class Fichero {
 		}
 
 	}
-
+   // La 
 	public void escribirArchivo() throws IOException {
 		 FileWriter archivo = new FileWriter(direccion);
 		 try 
 		 {
 		  archivo.flush();
+		  /*while() {
+			  
+		  }*/
 		 }
 		 catch(FileNotFoundException nodirec) 
 		 {
-			 
+			 System.out.println("No existe tal archivo");
 		 }
 	}
-   public void leerArchivo(int cantidadDePropiedades) throws FileNotFoundException {
+   public String leerArchivo(int cantidadDePropiedades) throws IOException {
+	   String cadena = "";
+	   String cadenaCompleta = "";
 	   FileReader archivo = new FileReader(direccion);   
-	   //
+	   BufferedReader b = new BufferedReader(archivo);
+	   while((cadena = b.readLine()) != null) {
+		 cadenaCompleta.concat(cadena);
+	   }
+	   return cadenaCompleta;
    }
+  
 }

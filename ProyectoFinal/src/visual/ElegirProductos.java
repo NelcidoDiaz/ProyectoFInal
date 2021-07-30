@@ -2,6 +2,7 @@ package visual;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,12 +15,14 @@ import javax.swing.JComboBox;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import source.Componente;
 
 public class ElegirProductos extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-  
+    private ArrayList <Componente> misCompentes;
+    private String [] Columnas;
 	/**
 	 * Launch the application.
 	 */
@@ -35,7 +38,9 @@ public class ElegirProductos extends JFrame {
 			}
 		});
 	}
-
+   public void getColumns(String [] columnas) { 
+		Columnas = columnas;
+   }
 	/**
 	 * Create the frame.
 	 */
@@ -47,7 +52,7 @@ public class ElegirProductos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		table = new JTable();
+		table = new JTable(null,this.Columnas);
 		table.setBounds(12, 12, 293, 370);
 		contentPane.add(table);
         
@@ -71,8 +76,10 @@ public class ElegirProductos extends JFrame {
 		label.setBounds(493, 263, 66, 15);
 		contentPane.add(label);
 		
-		// Imagen imagen = new Imagen("/imagenes/amazon-icon.jpg");
-		// imagen.setBounds(357, 12, 196, 82);
-		 //contentPane.add(imagen);
+		JLabel lblImagen = new JLabel("");
+		lblImagen.setIcon(new ImageIcon(ElegirProductos.class.getResource("/visual/imagenes/White-Background.png")));
+		lblImagen.setBounds(336, 12, 249, 153);
+		contentPane.add(lblImagen);
+		
 	}
 }
