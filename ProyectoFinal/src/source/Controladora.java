@@ -8,6 +8,7 @@ public class Controladora {
 	private ArrayList<Cliente> misClientes;
 	private ArrayList<Combo> misCombos;
 	private ArrayList<OrdenCompra> ordenCompra;
+	private static Controladora control = null;
 	
 	
 	public Controladora() {
@@ -17,6 +18,13 @@ public class Controladora {
 		misClientes = new ArrayList<Cliente>();
 		misCombos = new ArrayList<Combo>();
 		ordenCompra = new ArrayList<OrdenCompra>();
+	}
+	
+	public static Controladora getInstance() {
+		if(control == null) {
+			control = new Controladora();
+		}
+		return control;
 	}
 	
 	public ArrayList<Componente> getMisComponentes() {

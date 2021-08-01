@@ -15,6 +15,13 @@ import java.awt.Font;
 import javax.naming.ldap.Rdn;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.TitledBorder;
+
+import source.Controladora;
+import source.DiscoDuro;
+import source.MemoriaRam;
+import source.MicroProcesador;
+import source.TarjetaMadre;
+
 import javax.swing.SpinnerNumberModel;
 import javax.swing.UIManager;
 import java.awt.Color;
@@ -22,6 +29,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.JCheckBox;
 
 public class RegistroComponentes extends JFrame {
 
@@ -31,15 +40,13 @@ public class RegistroComponentes extends JFrame {
 	private JTextField txtPrecio;
 	private JTextField txtConector;
 	private JTextField txtMemoria;
-	private JTextField txtConexiones;
 	private JTextField txtModelo;
 	private JTextField txtSocket;
 	private JTextField txtVelocProces;
-	private JTextField txt_CantMemoria;
-	private JTextField txt_TipoMemoriaRAM;
+	private JTextField txtCantMemoria;
+	private JTextField txtTipoMemoriaRAM;
 	private JTextField txtModeloDisk;
 	private JTextField txtAlmacen;
-	private JTextField txtTipoConexion;
 	private JSpinner spnCantReal;
 	private JSpinner spnCantMin;
 	private JSpinner spnCantMax;
@@ -53,6 +60,12 @@ public class RegistroComponentes extends JFrame {
 	private JRadioButton rdbtnDiscoDuro;
 	private JRadioButton rdbtnMicroprocesador;
 	private JRadioButton rdbtnTarjetaMadre;
+	private JCheckBox chckbxIDE;
+	private JCheckBox chckbxSATA;
+	private JCheckBox chckbxSATA3;
+	private JCheckBox chckbxNVMe;
+	private JCheckBox chckbxSATA2;
+	private JComboBox cmbTipoConexion;
 
 	/**
 	 * Launch the application.
@@ -75,6 +88,7 @@ public class RegistroComponentes extends JFrame {
 	 * Create the frame.
 	 */
 	public RegistroComponentes() {
+
 		setTitle("Registro de Componentes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 570, 496);
@@ -184,10 +198,30 @@ public class RegistroComponentes extends JFrame {
 		pnlTarjetaMadre.add(txtMemoria);
 		txtMemoria.setColumns(10);
 		
-		txtConexiones = new JTextField();
-		txtConexiones.setBounds(117, 105, 161, 20);
-		pnlTarjetaMadre.add(txtConexiones);
-		txtConexiones.setColumns(10);
+		chckbxSATA = new JCheckBox("SATA");
+		chckbxSATA.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		chckbxSATA.setBounds(81, 128, 65, 23);
+		pnlTarjetaMadre.add(chckbxSATA);
+		
+		chckbxIDE = new JCheckBox("IDE");
+		chckbxIDE.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		chckbxIDE.setBounds(17, 128, 52, 23);
+		pnlTarjetaMadre.add(chckbxIDE);
+		
+		chckbxSATA2 = new JCheckBox("SATA-2");
+		chckbxSATA2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		chckbxSATA2.setBounds(148, 129, 76, 23);
+		pnlTarjetaMadre.add(chckbxSATA2);
+		
+		chckbxSATA3 = new JCheckBox("SATA-3");
+		chckbxSATA3.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		chckbxSATA3.setBounds(236, 129, 76, 23);
+		pnlTarjetaMadre.add(chckbxSATA3);
+		
+		chckbxNVMe = new JCheckBox("NVMe");
+		chckbxNVMe.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		chckbxNVMe.setBounds(333, 129, 65, 23);
+		pnlTarjetaMadre.add(chckbxNVMe);
 		
 		spnDescuento = new JSpinner();
 		spnDescuento.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -249,15 +283,15 @@ public class RegistroComponentes extends JFrame {
 		lblTipoMemoriaRAM.setBounds(10, 83, 80, 14);
 		pnlMemoriaRam.add(lblTipoMemoriaRAM);
 		
-		txt_CantMemoria = new JTextField();
-		txt_CantMemoria.setBounds(100, 27, 86, 20);
-		pnlMemoriaRam.add(txt_CantMemoria);
-		txt_CantMemoria.setColumns(10);
+		txtCantMemoria = new JTextField();
+		txtCantMemoria.setBounds(100, 27, 86, 20);
+		pnlMemoriaRam.add(txtCantMemoria);
+		txtCantMemoria.setColumns(10);
 		
-		txt_TipoMemoriaRAM = new JTextField();
-		txt_TipoMemoriaRAM.setBounds(100, 81, 86, 20);
-		pnlMemoriaRam.add(txt_TipoMemoriaRAM);
-		txt_TipoMemoriaRAM.setColumns(10);
+		txtTipoMemoriaRAM = new JTextField();
+		txtTipoMemoriaRAM.setBounds(100, 81, 86, 20);
+		pnlMemoriaRam.add(txtTipoMemoriaRAM);
+		txtTipoMemoriaRAM.setColumns(10);
 		
 		pnlComponente = new JPanel();
 		pnlComponente.setBorder(new TitledBorder(null, "Componentes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -355,28 +389,64 @@ public class RegistroComponentes extends JFrame {
 		
 		txtModeloDisk = new JTextField();
 		txtModeloDisk.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtModeloDisk.setBounds(66, 28, 127, 20);
+		txtModeloDisk.setBounds(66, 28, 146, 20);
 		pnlDiscoDuro.add(txtModeloDisk);
 		txtModeloDisk.setColumns(10);
 		
 		txtAlmacen = new JTextField();
-		txtAlmacen.setBounds(107, 71, 86, 20);
+		txtAlmacen.setBounds(107, 71, 105, 20);
 		pnlDiscoDuro.add(txtAlmacen);
 		txtAlmacen.setColumns(10);
 		
-		txtTipoConexion = new JTextField();
-		txtTipoConexion.setBounds(96, 113, 97, 20);
-		pnlDiscoDuro.add(txtTipoConexion);
-		txtTipoConexion.setColumns(10);
-		
 		JLabel lblNewLabel = new JLabel("GB");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel.setBounds(197, 74, 26, 14);
+		lblNewLabel.setBounds(220, 73, 26, 14);
 		pnlDiscoDuro.add(lblNewLabel);
+		
+		cmbTipoConexion = new JComboBox();
+		cmbTipoConexion.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "IDE", "SATA", "SATA-2", "SATA-3", "NVMe"}));
+		cmbTipoConexion.setBounds(103, 113, 109, 20);
+		pnlDiscoDuro.add(cmbTipoConexion);
 		
 		JButton btnAniadir = new JButton("A\u00F1adir");
 		btnAniadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String marca = txtMarca.getText();
+				String numSerie = txtNoSerie.getText();
+				float precio = Float.valueOf(txtPrecio.getText());
+				float descuento = (Float) spnDescuento.getValue() ;
+				int cantReal = (int) spnCantReal.getValue();
+				int cantMin = (int) spnCantMin.getValue();
+				int cantMax = (int) spnCantMax.getValue();
+				if(rdbtnMemoriaRam.isSelected()) {
+					int cantMemoria = Integer.valueOf(txtCantMemoria.getText());
+					String tipoMemoria = txtTipoMemoriaRAM.getText();
+					MemoriaRam ram = new MemoriaRam(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, cantMemoria, tipoMemoria);
+					Controladora.getInstance().getMisComponentes().add(ram);
+				}
+				else if(rdbtnDiscoDuro.isSelected()) {
+					String modelo = txtModeloDisk.getText();
+					int capAlmacen = Integer.valueOf(txtAlmacen.getText());
+					String tipoConexion = String.valueOf(cmbTipoConexion.getSelectedItem());
+					DiscoDuro disk = new DiscoDuro(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, modelo, capAlmacen, tipoConexion);
+					Controladora.getInstance().getMisComponentes().add(disk);
+				}
+				else if(rdbtnMicroprocesador.isSelected()) {
+					String modelo = txtModelo.getText();
+					String socket = txtSocket.getText();
+					float velcProcs = Float.parseFloat(txtVelocProces.getText());
+					MicroProcesador cpu = new MicroProcesador(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, modelo, socket, velcProcs);
+					Controladora.getInstance().getMisComponentes().add(cpu);
+				}
+				else if(rdbtnTarjetaMadre.isSelected()) {
+					String tipoConector = txtConector.getText();
+					String tipoMemoria = txtMemoria.getText();
+					String [] tipoConexion = new String [5];
+					String [] conexiones = llenarConexionTarjMadre(tipoConexion);
+					TarjetaMadre madre = new TarjetaMadre(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, tipoConector, tipoMemoria, conexiones);
+					Controladora.getInstance().getMisComponentes().add(madre);
+					
+				}
 				limpiar();
 			}
 		});
@@ -384,9 +454,42 @@ public class RegistroComponentes extends JFrame {
 		panel.add(btnAniadir);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main Frame = new Main();
+				Frame.setVisible(true);
+				dispose();
+			}
+		});
 		btnCancelar.setBounds(419, 413, 89, 23);
 		panel.add(btnCancelar);
 	}
+	
+	private String[] llenarConexionTarjMadre (String[] tipoConexion) {
+		int i = 0;
+		if(chckbxIDE.isSelected()) {
+			tipoConexion[i] = "IDE";
+			i++;
+		}
+		if(chckbxSATA.isSelected()) {
+			tipoConexion[i] = "SATA";
+			i++;
+		}
+		if(chckbxSATA2.isSelected()) {
+			tipoConexion[i] = "SATA-2";
+			i++;
+		}
+		if(chckbxSATA3.isSelected()) {
+			tipoConexion[i] = "SATA-3";
+			i++;
+		}
+		if(chckbxNVMe.isSelected()) {
+			tipoConexion[i] = "NVMe";
+			i++;
+		}
+		return tipoConexion;
+	}
+	
 	private void limpiar() {
 		txtMarca.setText("");
 		txtNoSerie.setText("");
