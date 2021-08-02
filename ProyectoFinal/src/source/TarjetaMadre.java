@@ -12,5 +12,29 @@ public class TarjetaMadre extends Componente {
 		this.tipoDeMemoria = tipoDeMemoria;
 		this.tipoDeConexiones = tipoDeConexiones;
 	}
+
+	public String getTipoDeConector() {
+		return tipoDeConector;
+	}
+
+	public void setTipoDeConector(String tipoDeConector) {
+		this.tipoDeConector = tipoDeConector;
+	}
+
+	public String getTipoDeMemoria() {
+		return tipoDeMemoria;
+	}
+
+	public void setTipoDeMemoria(String tipoDeMemoria) {
+		this.tipoDeMemoria = tipoDeMemoria;
+	}
+
+	public String[] getTipoDeConexiones() {
+		return tipoDeConexiones;
+	}
+
+	public void setTipoDeConexiones(String[] tipoDeConexiones) {
+		this.tipoDeConexiones = tipoDeConexiones;
+	}
 	 
 }
