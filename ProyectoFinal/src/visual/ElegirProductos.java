@@ -21,7 +21,7 @@ public class ElegirProductos extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-    private ArrayList <Componente> misCompentes;
+    private ArrayList <Componente>  misComponentes;
     private String [] Columnas;
 	/**
 	 * Launch the application.
@@ -41,6 +41,9 @@ public class ElegirProductos extends JFrame {
    public void getColumns(String [] columnas) { 
 		Columnas = columnas;
    }
+   public void getComponentes(ArrayList <Componente> compenentes) {
+	  misComponentes = compenentes;
+   }
 	/**
 	 * Create the frame.
 	 */
@@ -52,7 +55,7 @@ public class ElegirProductos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		table = new JTable(null,this.Columnas);
+		table = new JTable();
 		table.setBounds(12, 12, 293, 370);
 		contentPane.add(table);
         
