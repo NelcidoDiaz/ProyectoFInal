@@ -11,7 +11,7 @@ public class Factura {
 	private float total;
 	private Date fecha;
 	private ArrayList<Componente> Componentes;
-	private ArrayList <Combo> Combos;
+	private Combo Combos;
 	private Fichero archivo;
 
 	public Factura(String codFactura, Cliente cliente, float total, Date fecha, ArrayList<Componente> componentes) {
@@ -68,5 +68,13 @@ public class Factura {
 	}
    public void guardar() {
 	   this.archivo = new Fichero("~/src/ficheros/facturas.txt");
+   }
+   
+   public void calcTotal() {
+	   for(Componente i: Componentes) {
+		   if(i!=null) {
+			   total += i.calcpreciotot();
+		   }
+	   } 
    }
 }

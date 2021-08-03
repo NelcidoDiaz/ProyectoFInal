@@ -1,12 +1,14 @@
 package source;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Controladora {
+public class Controladora implements Serializable {
 	private ArrayList<Componente> misComponentes;
 	private ArrayList<Factura> misFacturas;
 	private ArrayList<Cliente> misClientes;
 	private ArrayList<Combo> misCombos;
+	private ArrayList<Empleado> misEmpleados;
 	private ArrayList<OrdenCompra> ordenCompra;
 	private static Controladora control = null;
 	
@@ -17,6 +19,7 @@ public class Controladora {
 		misFacturas = new ArrayList<Factura>();
 		misClientes = new ArrayList<Cliente>();
 		misCombos = new ArrayList<Combo>();
+		misEmpleados = new ArrayList<Empleado>();
 		ordenCompra = new ArrayList<OrdenCompra>();
 	}
 	
@@ -27,6 +30,22 @@ public class Controladora {
 		return control;
 	}
 	
+	public ArrayList<Empleado> getMisEmpleados() {
+		return misEmpleados;
+	}
+
+	public void setMisEmpleados(ArrayList<Empleado> misEmpleados) {
+		this.misEmpleados = misEmpleados;
+	}
+
+	public static Controladora getControl() {
+		return control;
+	}
+
+	public static void setControl(Controladora control) {
+		Controladora.control = control;
+	}
+
 	public ArrayList<Componente> getMisComponentes() {
 		return misComponentes;
 	}
@@ -71,9 +90,9 @@ public class Controladora {
 		misComponentes.add(compo);
 	}
 	
-	public void insertarFactura(Factura factura) {
+	public void insertarFactura(Factura factura, int ventas) {
 		misFacturas.add(factura);
-		disminuirCompInsideFactura(factura);
+		disminuirCompInsideFactura(factura,ventas);
 	}
 	
 	public void insertarOrdenCompra(OrdenCompra compra) {
@@ -81,21 +100,21 @@ public class Controladora {
 	}
 	
 	// Esta funcion se encarga de restar la cantreal de los componentes del almacen si estos se encuentran en factura.
-	private void disminuirCompInsideFactura(Factura factura) {
+	private void disminuirCompInsideFactura(Factura factura, int ventas) {
 		for(int i = 0; i < factura.getComponentes().size(); i++) {
-			enctCompFact(factura.getComponentes().get(i).numeroDeSerie,factura,i);
+			enctCompFact(factura.getComponentes().get(i).numeroDeSerie,factura,i,ventas);
 		}
 	}
 	
 	// Esta funcion se encarga de comparar el numSerie del componente con el que esta en almacen y si esto 
 	// se cumple le resta la cantreal al componente del almacen.
-	private void enctCompFact(String numSerie, Factura factura, int j) {
+	private void enctCompFact(String numSerie, Factura factura, int j, int ventas) {
 		boolean existe = false;
 		int i = 0;
 		while(!existe && i < misComponentes.size()) {
 			if(misComponentes.get(i).getNumeroDeSerie().equalsIgnoreCase(numSerie)) {
 				existe = true;
-				misComponentes.get(i).cantReal -= factura.getComponentes().get(j).cantReal ;
+				misComponentes.get(i).cantReal -= ventas;
 			}
 			i++;
 		}
@@ -107,6 +126,10 @@ public class Controladora {
 	
 	public void insertarCombo(Combo combo) {
 		misCombos.add(combo);
+	}
+	
+	public void insertarEmpleado(Empleado empleado) {
+		misEmpleados.add(empleado);
 	}
 	
 	public void aumentarCompInsideOrden(OrdenCompra compra, boolean aceptada) {

@@ -30,6 +30,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JCheckBox;
 
 public class RegistroComponentes extends JFrame {
@@ -50,7 +51,6 @@ public class RegistroComponentes extends JFrame {
 	private JSpinner spnCantReal;
 	private JSpinner spnCantMin;
 	private JSpinner spnCantMax;
-	private JSpinner spnDescuento;
 	private JPanel pnlDiscoDuro;
 	private JPanel pnlMicroprocesador;
 	private JPanel pnlComponente;
@@ -66,6 +66,7 @@ public class RegistroComponentes extends JFrame {
 	private JCheckBox chckbxNVMe;
 	private JCheckBox chckbxSATA2;
 	private JComboBox cmbTipoConexion;
+	private JTextField txtDescuento;
 
 	/**
 	 * Launch the application.
@@ -222,12 +223,6 @@ public class RegistroComponentes extends JFrame {
 		chckbxNVMe.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		chckbxNVMe.setBounds(333, 129, 65, 23);
 		pnlTarjetaMadre.add(chckbxNVMe);
-		
-		spnDescuento = new JSpinner();
-		spnDescuento.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		spnDescuento.setModel(new SpinnerNumberModel(0, 0, 100, 1));
-		spnDescuento.setBounds(386, 80, 56, 20);
-		panel.add(spnDescuento);
 		
 		pnlMicroprocesador = new JPanel();
 		pnlMicroprocesador.setVisible(false);
@@ -414,7 +409,7 @@ public class RegistroComponentes extends JFrame {
 				String marca = txtMarca.getText();
 				String numSerie = txtNoSerie.getText();
 				float precio = Float.valueOf(txtPrecio.getText());
-				float descuento = (Float) spnDescuento.getValue() ;
+				float descuento = Float.valueOf(txtDescuento.getText()) ;
 				int cantReal = (int) spnCantReal.getValue();
 				int cantMin = (int) spnCantMin.getValue();
 				int cantMax = (int) spnCantMax.getValue();
@@ -447,6 +442,7 @@ public class RegistroComponentes extends JFrame {
 					Controladora.getInstance().getMisComponentes().add(madre);
 					
 				}
+				JOptionPane.showMessageDialog(null, "Componente registrado", "Informacion",JOptionPane.INFORMATION_MESSAGE);
 				limpiar();
 			}
 		});
@@ -463,6 +459,11 @@ public class RegistroComponentes extends JFrame {
 		});
 		btnCancelar.setBounds(419, 413, 89, 23);
 		panel.add(btnCancelar);
+		
+		txtDescuento = new JTextField();
+		txtDescuento.setBounds(375, 81, 86, 20);
+		panel.add(txtDescuento);
+		txtDescuento.setColumns(10);
 	}
 	
 	private String[] llenarConexionTarjMadre (String[] tipoConexion) {
@@ -494,7 +495,7 @@ public class RegistroComponentes extends JFrame {
 		txtMarca.setText("");
 		txtNoSerie.setText("");
 		txtPrecio.setText("");
-		spnDescuento.setValue(0);
+		txtDescuento.setText("");
 		spnCantMax.setValue(0);
 		spnCantMin.setValue(0);
 		spnCantReal.setValue(0);

@@ -7,9 +7,21 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import source.Controladora;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import java.awt.Toolkit;
+import javax.swing.JMenuItem;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class Main extends JFrame {
 
@@ -21,6 +33,23 @@ public class Main extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				FileInputStream control;
+				FileOutputStream control2;
+				ObjectInputStream controlRead;
+				ObjectOutputStream controlWrite;
+				try {
+					control = new FileInputStream("Controladora.dat");
+					controlRead = new ObjectInputStream(control);
+					Controladora temp = (Controladora) controlRead.readObject();
+					Controladora.setControl(temp);
+					controlRead.close();
+				} catch (FileNotFoundException q) {
+				
+				} catch(IOException q) {
+					
+				}catch(ClassNotFoundException q) {
+					q.printStackTrace();
+				}
 				try {
 					Main frame = new Main();
 					frame.setVisible(true);
@@ -47,23 +76,55 @@ public class Main extends JFrame {
 		JMenu mnVendedor = new JMenu("Vendedor");
 		menuBar.add(mnVendedor);
 		
-		JMenu mnPrimerItem = new JMenu("Facturar");
-		mnVendedor.add(mnPrimerItem);
+		JMenu mnFacturas = new JMenu("Facturas");
+		mnVendedor.add(mnFacturas);
+		
+		JMenuItem mntmFacturar = new JMenuItem("Facturar");
+		mnFacturas.add(mntmFacturar);
+		
+		JMenuItem mntmListFacturas = new JMenuItem("Lista Facturas");
+		mnFacturas.add(mntmListFacturas);
 		
 		JMenu mnClientes = new JMenu("Clientes");
 		mnVendedor.add(mnClientes);
 		
+		JMenuItem mntmListClientes = new JMenuItem("Lista Clientes");
+		mnClientes.add(mntmListClientes);
+		
 		JMenu mnAdministrador = new JMenu("Administrador");
 		menuBar.add(mnAdministrador);
 		
-		JMenu mnPedidos = new JMenu("Pedidos");
-		mnAdministrador.add(mnPedidos);
+		JMenu mnComponentes = new JMenu("Componentes");
+		mnAdministrador.add(mnComponentes);
 		
-		JMenu mnHacerPedido = new JMenu("Hacer Pedido");
-		mnPedidos.add(mnHacerPedido);
+		JMenuItem mntmRegComponentes = new JMenuItem("Crear Componentes");
+		mntmRegComponentes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				RegistroComponentes regComp = new RegistroComponentes();
+				regComp.setVisible(true);
+			}
+		});
+		mnComponentes.add(mntmRegComponentes);
 		
-		JMenu mnVerPedidos = new JMenu("Ver Pedidos");
-		mnPedidos.add(mnVerPedidos);
+		JMenuItem mntmListComponentes = new JMenuItem("Lista Componentes");
+		mntmListComponentes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ListarComponentes listcomp = new ListarComponentes();
+				listcomp.setVisible(true);
+			}
+		});
+		mnComponentes.add(mntmListComponentes);
+		
+		JMenu mnCombos = new JMenu("Combos");
+		mnAdministrador.add(mnCombos);
+		
+		JMenuItem mntmRegCombo = new JMenuItem("Crear Combo");
+		mnCombos.add(mntmRegCombo);
+		
+		JMenuItem mntmListCombo = new JMenuItem("Lista Combos");
+		mnCombos.add(mntmListCombo);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

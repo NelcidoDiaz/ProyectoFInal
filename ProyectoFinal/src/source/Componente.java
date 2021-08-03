@@ -99,5 +99,11 @@ public abstract class Componente {
 		}
 	}
 	
+	public float calcpreciotot() {
+		float total = precio;
+		total = precio + (precio*descuento);
+		return total;
+	}
+	
 	 
 }
