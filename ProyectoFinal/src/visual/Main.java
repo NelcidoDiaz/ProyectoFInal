@@ -16,12 +16,15 @@ import java.awt.Toolkit;
 import javax.swing.JMenuItem;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Main extends JFrame {
 
@@ -33,28 +36,26 @@ public class Main extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				FileInputStream control;
-				FileOutputStream control2;
-				ObjectInputStream controlRead;
-				ObjectOutputStream controlWrite;
-				try {
-					control = new FileInputStream("Controladora.dat");
-					controlRead = new ObjectInputStream(control);
-					Controladora temp = (Controladora) controlRead.readObject();
-					Controladora.setControl(temp);
-					controlRead.close();
-				} catch (FileNotFoundException q) {
-				
-				} catch(IOException q) {
-					
-				}catch(ClassNotFoundException q) {
-					q.printStackTrace();
-				}
 				try {
 					Main frame = new Main();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+				}
+			}
+			public void windowClosing(WindowEvent e) {
+				FileOutputStream control2;
+				ObjectOutputStream controlWrite;
+				try {
+					control2 = new  FileOutputStream("Tienda.dat");
+					controlWrite = new ObjectOutputStream(control2);
+					controlWrite.writeObject(Controladora.getInstance());
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		});
@@ -98,23 +99,23 @@ public class Main extends JFrame {
 		mnAdministrador.add(mnComponentes);
 		
 		JMenuItem mntmRegComponentes = new JMenuItem("Crear Componentes");
-		mntmRegComponentes.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				RegistroComponentes regComp = new RegistroComponentes();
-				regComp.setVisible(true);
+		mntmRegComponentes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegistroComponentes frame = new RegistroComponentes();
+				frame.setVisible(true);
 			}
 		});
+		
 		mnComponentes.add(mntmRegComponentes);
 		
 		JMenuItem mntmListComponentes = new JMenuItem("Lista Componentes");
-		mntmListComponentes.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				ListarComponentes listcomp = new ListarComponentes();
-				listcomp.setVisible(true);
+		mntmListComponentes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarComponentes frame = new ListarComponentes();
+				frame.setVisible(true);
 			}
 		});
+
 		mnComponentes.add(mntmListComponentes);
 		
 		JMenu mnCombos = new JMenu("Combos");

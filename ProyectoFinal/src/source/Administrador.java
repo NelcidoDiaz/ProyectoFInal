@@ -3,7 +3,7 @@ package source;
 public class Administrador extends Empleado{
   private String codigoDeAdministrador;
 
-public Administrador(String nombre, String apellido, String cedula, String codigo, int id, float sueldo,
+public Administrador(String nombre, String apellido, String cedula, String codigo, String id, float sueldo,
 		String codigoDeAdministrador) {
 	super(nombre, apellido, cedula, codigo, id, sueldo);
 	this.codigoDeAdministrador = codigoDeAdministrador;

@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import source.Componente;
 import source.Controladora;
 import source.Empleado;
 
@@ -47,8 +48,6 @@ public class Login extends JFrame {
 					try {
 						controladora2 = new  FileOutputStream("empresa.dat");
 						controladoraWrite = new ObjectOutputStream(controladora2);
-						Empleado temp = new Empleado("Gesbien", "Nuñez", "4023164610","admin","admin",10000);
-						Controladora.getInstance().insertarEmpleado(temp);
 						controladoraWrite.writeObject(Controladora.getInstance());
 						controladora2.close();
 						controladoraWrite.close();

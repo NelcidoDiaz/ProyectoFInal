@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -19,7 +20,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ListarComponentes extends JFrame {
 
@@ -28,6 +36,8 @@ public class ListarComponentes extends JFrame {
 	public static Object[] fila;
 	private JTable table;
 	private int seleccion;
+	private ArrayList<Componente> misComponentes = Controladora.getInstance().getMisComponentes();
+	private JButton btnEliminar;
 
 	/**
 	 * Launch the application.
@@ -55,6 +65,7 @@ public class ListarComponentes extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		setLocationRelativeTo(null);
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
@@ -69,9 +80,23 @@ public class ListarComponentes extends JFrame {
 		panel_1.add(scrollPane, BorderLayout.CENTER);
 		
 		modelo = new DefaultTableModel();
-		String[] columns = {"Numero de Serie","Marca","Precio","Cant Real","Capacidad", "Tipo de Memoria"};
+		String[] columns = {"Numero de Serie","Marca","Precio","Cant Real","Tipo","Capacidad", "Tipo de Memoria"};
+		modelo.setColumnIdentifiers(columns);
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				seleccion = table.getSelectedRow();
+				if(seleccion!=-1) {
+					btnEliminar.setEnabled(true);
+				}else {
+					btnEliminar.setEnabled(false);
+				}
+			}
+		});
+		table.setModel(modelo);
 		scrollPane.setViewportView(table);
+		cargarTabla();
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
@@ -84,10 +109,21 @@ public class ListarComponentes extends JFrame {
 		btnCancelar.setBounds(400, 314, 89, 23);
 		panel.add(btnCancelar);
 		
-		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int option = JOptionPane.showConfirmDialog(null, "Esta seguro que desea eliminar este componente?","Confirmación",JOptionPane.WARNING_MESSAGE);
+				if(option==JOptionPane.OK_OPTION) {
+					Controladora.getInstance().eliminarComponente(Controladora.getInstance().buscComponente(modelo.getValueAt(seleccion, 0).toString()));
+					cargarTabla();
+					btnEliminar.setEnabled(false);
+				}
+			}
+		});
 		btnEliminar.setBounds(296, 314, 89, 23);
 		panel.add(btnEliminar);
 	}
+	
 	private void cargarTabla() {
 		modelo.setRowCount(0);
 		fila = new Object[modelo.getColumnCount()];
@@ -118,6 +154,7 @@ public class ListarComponentes extends JFrame {
 					fila[6] = ((TarjetaMadre) i).getTipoDeMemoria();
 				}
 			}
+			modelo.addRow(fila);
 		}
 	}
 }

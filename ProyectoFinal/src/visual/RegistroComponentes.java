@@ -12,24 +12,29 @@ import javax.swing.JSpinner;
 import javax.swing.JComboBox;
 import java.awt.Font;
 
-import javax.naming.ldap.Rdn;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.TitledBorder;
 
+import source.Componente;
 import source.Controladora;
 import source.DiscoDuro;
 import source.MemoriaRam;
 import source.MicroProcesador;
 import source.TarjetaMadre;
 
-import javax.swing.SpinnerNumberModel;
 import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JCheckBox;
 
@@ -74,6 +79,35 @@ public class RegistroComponentes extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				FileInputStream control;
+				FileOutputStream control2;
+				ObjectInputStream controlRead;
+				ObjectOutputStream controlWrite;
+				try {
+					control = new FileInputStream ("Tienda.dat");
+					controlRead = new ObjectInputStream(control);
+					Controladora temp = (Controladora)controlRead.readObject();
+					Controladora.setControl(temp);
+					control.close();
+					controlRead.close();
+				} catch (FileNotFoundException e) {
+					try {
+						control2 = new  FileOutputStream("Tienda.dat");
+						controlWrite = new ObjectOutputStream(control2);
+						controlWrite.writeObject(Controladora.getInstance());
+						control2.close();
+						controlWrite.close();
+					} catch (FileNotFoundException e1) {
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+					}
+				} catch (IOException e) {
+					
+					
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				try {
 					RegistroComponentes frame = new RegistroComponentes();
 					frame.setVisible(true);
@@ -417,21 +451,21 @@ public class RegistroComponentes extends JFrame {
 					int cantMemoria = Integer.valueOf(txtCantMemoria.getText());
 					String tipoMemoria = txtTipoMemoriaRAM.getText();
 					MemoriaRam ram = new MemoriaRam(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, cantMemoria, tipoMemoria);
-					Controladora.getInstance().getMisComponentes().add(ram);
+					Controladora.getInstance().insertarComponente(ram);
 				}
 				else if(rdbtnDiscoDuro.isSelected()) {
 					String modelo = txtModeloDisk.getText();
 					int capAlmacen = Integer.valueOf(txtAlmacen.getText());
 					String tipoConexion = String.valueOf(cmbTipoConexion.getSelectedItem());
 					DiscoDuro disk = new DiscoDuro(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, modelo, capAlmacen, tipoConexion);
-					Controladora.getInstance().getMisComponentes().add(disk);
+					Controladora.getInstance().insertarComponente(disk);
 				}
 				else if(rdbtnMicroprocesador.isSelected()) {
 					String modelo = txtModelo.getText();
 					String socket = txtSocket.getText();
 					float velcProcs = Float.parseFloat(txtVelocProces.getText());
 					MicroProcesador cpu = new MicroProcesador(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, modelo, socket, velcProcs);
-					Controladora.getInstance().getMisComponentes().add(cpu);
+					Controladora.getInstance().insertarComponente(cpu);
 				}
 				else if(rdbtnTarjetaMadre.isSelected()) {
 					String tipoConector = txtConector.getText();
@@ -439,9 +473,9 @@ public class RegistroComponentes extends JFrame {
 					String [] tipoConexion = new String [5];
 					String [] conexiones = llenarConexionTarjMadre(tipoConexion);
 					TarjetaMadre madre = new TarjetaMadre(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, tipoConector, tipoMemoria, conexiones);
-					Controladora.getInstance().getMisComponentes().add(madre);
-					
+					Controladora.getInstance().insertarComponente(madre);
 				}
+				
 				JOptionPane.showMessageDialog(null, "Componente registrado", "Informacion",JOptionPane.INFORMATION_MESSAGE);
 				limpiar();
 			}
