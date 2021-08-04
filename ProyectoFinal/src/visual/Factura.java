@@ -166,9 +166,7 @@ public class Factura extends JFrame {
 				}
 				ElegirProductos productos = new ElegirProductos();
 				productos.getImages(Url);
-				productos.setVisible(true);
-				//System.out.println(Url);
-			   
+				productos.setVisible(true);   
 				productos.getColumns(misColumnas);
 				dispose();
 			}

@@ -83,6 +83,18 @@ public class Main extends JFrame {
 		mnVendedor.add(mnFacturas);
 		
 		JMenuItem mntmFacturar = new JMenuItem("Facturar");
+		mntmFacturar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				 Factura factura = new Factura();
+				 factura.setVisible(true);
+			}
+		});
+		mntmFacturar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			
+			}
+		});
 		mnFacturas.add(mntmFacturar);
 		
 		JMenuItem mntmListFacturas = new JMenuItem("Lista Facturas");
@@ -92,6 +104,13 @@ public class Main extends JFrame {
 		mnVendedor.add(mnClientes);
 		
 		JMenuItem mntmListClientes = new JMenuItem("Lista Clientes");
+		mntmListClientes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			 ListarClientes listarClientes = new ListarClientes();
+			 listarClientes.setVisible(true);
+			}
+		});
 		mnClientes.add(mntmListClientes);
 		
 		JMenu mnAdministrador = new JMenu("Administrador");
@@ -139,6 +158,11 @@ public class Main extends JFrame {
 		mnAdministrador.add(mnEmpleados);
 		
 		JMenuItem mntmRegEmpleados = new JMenuItem("Registro Empleado");
+		mntmRegEmpleados.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 		mntmRegEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegEmpleado frame = new RegEmpleado();
