@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
@@ -28,7 +29,8 @@ public class ElegirProductos extends JFrame {
 	private JPanel contentPane;
 	
     private ArrayList <Componente>  misComponentes;
-    private ArrayList <String> Columnas;
+    private String Url;
+    private ArrayList <String> Columnas = new  ArrayList <String>();
    // private final 
    
 	/**
@@ -52,6 +54,9 @@ public class ElegirProductos extends JFrame {
    public void getComponentes(ArrayList <Componente> compenentes) {
 	  misComponentes = compenentes;
    }
+   public void getImages(String url) {
+	 Url = url;  
+   }
 	/**
 	 * Create the frame.
 	 */
@@ -66,7 +71,7 @@ public class ElegirProductos extends JFrame {
 						model.addColumn(columna);
 						System.out.println(columna);
 					 }
-			
+				 
 			}
 			
 		});
@@ -81,7 +86,7 @@ public class ElegirProductos extends JFrame {
 
 		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 619, 435);
+		setBounds(100, 100, 1110, 435);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -89,34 +94,43 @@ public class ElegirProductos extends JFrame {
 		
         
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(475, 204, 110, 24);
+		comboBox.setBounds(838, 178, 110, 24);
 		contentPane.add(comboBox);
 		
 		JLabel lblCantidad = new JLabel("Cantidad");
-		lblCantidad.setBounds(357, 209, 66, 15);
+		lblCantidad.setBounds(722, 183, 66, 15);
 		contentPane.add(lblCantidad);
 		
 		JButton btnComprar = new JButton("Comprar");
-		btnComprar.setBounds(471, 305, 114, 25);
+		btnComprar.setBounds(727, 286, 114, 25);
 		contentPane.add(btnComprar);
 		 
 		JLabel lblDescuento = new JLabel("Descuento");
-		lblDescuento.setBounds(357, 263, 86, 15);
+		lblDescuento.setBounds(727, 237, 86, 15);
 		contentPane.add(lblDescuento);
 		
 		JLabel label = new JLabel("0");
-		label.setBounds(493, 263, 66, 15);
+		label.setBounds(838, 237, 66, 15);
 		contentPane.add(label);
 		
 	
-		JLabel lblImagen = new JLabel("");
-		lblImagen.setIcon(new ImageIcon(ElegirProductos.class.getResource("/visual/imagenes/White-Background.png")));
-		lblImagen.setBounds(336, 12, 249, 153);
-		contentPane.add(lblImagen);
+	
 		JTable table = new JTable(model);
-		table.setBounds(12, 23, 282, 363);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JLabel lblImagen = new JLabel("");
+				lblImagen.setIcon(new ImageIcon(ElegirProductos.class.getResource(Url.toString())));
+				lblImagen.setBounds(699, 0, 249, 153);
+				contentPane.add(lblImagen);
+			}
+		});
+		 
+		table.setBounds(12, 23, 638, 363);
+		table.setFillsViewportHeight(true); 
+		//model.addColumn();
 		contentPane.add(table);
-		table.setModel(model);
+		model.addRow(new Object[]{"v1", "v2"});
 		
 	}
 }

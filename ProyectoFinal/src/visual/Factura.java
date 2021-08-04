@@ -27,6 +27,7 @@ import source.DiscoDuro;
 import source.MemoriaRam;
 import source.TarjetaMadre;
 import source.MicroProcesador;
+
 public class Factura extends JFrame {
 
 	private JPanel contentPane;
@@ -36,7 +37,7 @@ public class Factura extends JFrame {
 	private JTextField textField_3;
 	private JTable tblElegidos;
 	private ArrayList<Componente> misComponentes = new ArrayList<Componente>();
-    
+
 	// private
 	/**
 	 * Launch the application.
@@ -54,8 +55,8 @@ public class Factura extends JFrame {
 		});
 	}
 
-	public String [] getFields() {
-       
+	public ArrayList<String> getFields() {
+
 		return null;
 	}
 
@@ -141,18 +142,35 @@ public class Factura extends JFrame {
 		comboBox_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String valor = comboBox_1.getSelectedItem().toString();
-				ArrayList <String> misColumnas = new ArrayList <String>();
-				misColumnas.addAll(Arrays.asList("Marca","Precio", "numeroDeSerie", "descuento", "cantReal", "cantMin","cantMax", "Modelo", "Almacenamiento", "tipoDeConexion"));
+				String Url = "";
+				ArrayList<String> misColumnas = new ArrayList<String>();
+				misColumnas.addAll(Arrays.asList("Marca", "Precio", "numeroDeSerie", "descuento", "cantReal",
+						"cantMin", "cantMax"));
 				switch (valor) {
 				case "Disco Duro":
-				 int contador = 0;
-				 ElegirProductos productos = new ElegirProductos();
-				 productos.setVisible(true);
-				 productos.getColumns(misColumnas);
+					misColumnas.addAll(Arrays.asList("Modelo", "Almacenamiento", "tipoDeConexion"));
+					Url = "/visual/imagenes/DiscoDuro-1.jpg";
+                    break;
 				case "Memoria Ram":
+					misColumnas.addAll(Arrays.asList("Cantidad de Memoria", "Tipo De Memoria"));
+					Url = "/visual/imagenes/MemoriaRam-1.jpg";
+                    break;
 				case "Tarjeta Madre":
+					misColumnas.addAll(Arrays.asList("Tipos de conexion","Tipo De Conector","Tipo De Memoria"));
+					Url = "/visual/imagenes/TarjetaMadre-1.jpg";
+                    break;
 				case "Micro Procesador":
+					misColumnas.addAll(Arrays.asList("modelo","socket","velocidad"));
+					Url = "/visual/imagenes/MicroProcesador-1.jpg";
+					break;
 				}
+				ElegirProductos productos = new ElegirProductos();
+				productos.getImages(Url);
+				productos.setVisible(true);
+				//System.out.println(Url);
+			   
+				productos.getColumns(misColumnas);
+				dispose();
 			}
 		});
 		comboBox_1.addItemListener(new ItemListener() {
