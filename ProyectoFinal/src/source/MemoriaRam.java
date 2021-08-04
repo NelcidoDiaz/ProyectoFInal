@@ -3,6 +3,10 @@ package source;
 import exception.NotNegativeNumberExeption;
 
 public class MemoriaRam extends Componente {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2340837986301934157L;
 	private int cantMemoria;
 	private String tipoMemoria;
 

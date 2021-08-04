@@ -1,8 +1,12 @@
 package source;
 
-public abstract class Empleado extends Persona {
+public class Empleado extends Persona {
 
-    private String codigo;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1662742825348670363L;
+	private String codigo;
     private String id;
     private float sueldo;
     
@@ -12,6 +16,7 @@ public abstract class Empleado extends Persona {
 		this.id = id;
 		this.sueldo = sueldo;
 	}
+	
 	public String getCodigo() {
 		return codigo;
 	}

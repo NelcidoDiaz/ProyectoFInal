@@ -1,7 +1,11 @@
 package source;
 
 public class TarjetaMadre extends Componente {
-	 private String tipoDeConector;
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 473557975920116685L;
+	private String tipoDeConector;
 	 private String tipoDeMemoria;
 	 private String [] tipoDeConexiones;
 	 

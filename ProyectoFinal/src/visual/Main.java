@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import source.Administrador;
 import source.Controladora;
 
 import javax.swing.JMenuBar;
@@ -16,6 +17,7 @@ import java.awt.Toolkit;
 import javax.swing.JMenuItem;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -29,7 +31,6 @@ import java.awt.event.ActionEvent;
 public class Main extends JFrame {
 
 	private JPanel contentPane;
-
 	/**
 	 * Launch the application.
 	 */
@@ -43,6 +44,13 @@ public class Main extends JFrame {
 					e.printStackTrace();
 				}
 			}
+		});
+	}
+	/**
+	 * Create the frame.
+	 */
+	public Main() {
+		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				FileOutputStream control2;
 				ObjectOutputStream controlWrite;
@@ -59,12 +67,6 @@ public class Main extends JFrame {
 				}
 			}
 		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public Main() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/visual/imagenes/amazon-icon.jpg")));
 		setTitle("Ventana principal");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,6 +95,12 @@ public class Main extends JFrame {
 		mnClientes.add(mntmListClientes);
 		
 		JMenu mnAdministrador = new JMenu("Administrador");
+		if(Controladora.getLoginuser() instanceof Administrador) {
+			mnAdministrador.setEnabled(true);
+		}
+		else {
+			mnAdministrador.setEnabled(true);
+		}
 		menuBar.add(mnAdministrador);
 		
 		JMenu mnComponentes = new JMenu("Componentes");
@@ -126,6 +134,27 @@ public class Main extends JFrame {
 		
 		JMenuItem mntmListCombo = new JMenuItem("Lista Combos");
 		mnCombos.add(mntmListCombo);
+		
+		JMenu mnEmpleados = new JMenu("Empleados");
+		mnAdministrador.add(mnEmpleados);
+		
+		JMenuItem mntmRegEmpleados = new JMenuItem("Registro Empleado");
+		mntmRegEmpleados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegEmpleado frame = new RegEmpleado();
+				frame.setVisible(true);
+			}
+		});
+		mnEmpleados.add(mntmRegEmpleados);
+		
+		JMenuItem mntmListEmpleado = new JMenuItem("Lista Empleados");
+		mntmListEmpleado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarEmpleados frame = new ListarEmpleados();
+				frame.setVisible(true);
+			}
+		});
+		mnEmpleados.add(mntmListEmpleado);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

@@ -36,7 +36,6 @@ public class ListarComponentes extends JFrame {
 	public static Object[] fila;
 	private JTable table;
 	private int seleccion;
-	private ArrayList<Componente> misComponentes = Controladora.getInstance().getMisComponentes();
 	private JButton btnEliminar;
 
 	/**
@@ -45,6 +44,22 @@ public class ListarComponentes extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				FileInputStream control;
+				ObjectInputStream controlRead;
+
+				try {
+					control = new FileInputStream("Tienda.dat");
+					controlRead = new ObjectInputStream(control);
+					Controladora temp = (Controladora) controlRead.readObject();
+					Controladora.setControl(temp);
+					controlRead.close();
+				} catch (FileNotFoundException q) {
+				
+				} catch(IOException q) {
+					
+				}catch(ClassNotFoundException q) {
+					q.printStackTrace();
+				}
 				try {
 					ListarComponentes frame = new ListarComponentes();
 					frame.setVisible(true);

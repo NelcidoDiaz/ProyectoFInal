@@ -1,11 +1,16 @@
 package source;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
 import exception.NotNegativeNumberExeption;
 
-public class Factura {
+public class Factura implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6000817889584556170L;
 	private String codFactura;
 	private Cliente cliente;
 	private float total;

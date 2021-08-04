@@ -4,12 +4,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Controladora implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1320277948482211745L;
 	private ArrayList<Componente> misComponentes;
 	private ArrayList<Factura> misFacturas;
 	private ArrayList<Cliente> misClientes;
 	private ArrayList<Combo> misCombos;
 	private ArrayList<Empleado> misEmpleados;
 	private ArrayList<OrdenCompra> ordenCompra;
+	private static Empleado loginuser;
 	private static Controladora control = null;
 	
 	
@@ -30,6 +36,14 @@ public class Controladora implements Serializable {
 		return control;
 	}
 	
+	public static Empleado getLoginuser() {
+		return loginuser;
+	}
+
+	public static void setLoginuser(Empleado loginuser) {
+		Controladora.loginuser = loginuser;
+	}
+
 	public ArrayList<Empleado> getMisEmpleados() {
 		return misEmpleados;
 	}
@@ -184,6 +198,21 @@ public class Controladora implements Serializable {
 		 }
 		}
 		return null;
-		
+	}
+	
+	public boolean confirmLogin(String user, String pass) {
+		boolean login = false;
+		for(Empleado m: misEmpleados) {
+			if(m!=null) {
+				if(m.getId().equals(user)&& m.getCodigo().equalsIgnoreCase(pass)) {
+					loginuser = m;
+					login = true;
+				}
+			}
+			else {
+				loginuser = null;
+			}
+		}
+		return login;
 	}
 }

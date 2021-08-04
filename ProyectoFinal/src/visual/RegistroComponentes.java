@@ -585,6 +585,15 @@ public class RegistroComponentes extends JFrame {
 		txtNoSerie.setText("");
 		txtPrecio.setText("");
 		txtDescuento.setText("");
+		txtAlmacen.setText("");
+		txtCantMemoria.setText("");
+		txtConector.setText("");
+		txtMemoria.setText("");
+		txtModelo.setText("");
+		txtModeloDisk.setText("");
+		txtSocket.setText("");
+		txtTipoMemoriaRAM.setText("");
+		txtVelocProces.setText("");
 		spnCantMax.setValue(0);
 		spnCantMin.setValue(0);
 		spnCantReal.setValue(0);
@@ -592,5 +601,10 @@ public class RegistroComponentes extends JFrame {
 		rdbtnDiscoDuro.setSelected(false);
 		rdbtnMicroprocesador.setSelected(false);
 		rdbtnTarjetaMadre.setSelected(false);
+		chckbxNVMe.setSelected(false);
+		chckbxIDE.setSelected(false);
+		chckbxSATA.setSelected(false);
+		chckbxSATA2.setSelected(false);
+		chckbxSATA3.setSelected(false);
 	}
 }
