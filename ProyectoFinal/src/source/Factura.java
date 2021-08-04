@@ -1,6 +1,7 @@
 package source;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -14,12 +15,12 @@ public class Factura implements Serializable {
 	private String codFactura;
 	private Cliente cliente;
 	private float total;
-	private Date fecha;
+	private LocalDate fecha;
 	private ArrayList<Componente> Componentes;
 	private Combo Combos;
 	private Fichero archivo;
 
-	public Factura(String codFactura, Cliente cliente, float total, Date fecha, ArrayList<Componente> componentes) {
+	public Factura(String codFactura, Cliente cliente, float total, LocalDate fecha, ArrayList<Componente> componentes) {
 		super();
 		this.codFactura = codFactura;
 		this.cliente = cliente;
@@ -56,11 +57,11 @@ public class Factura implements Serializable {
 		}
 	}
 
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 

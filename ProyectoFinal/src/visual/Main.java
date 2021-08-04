@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import source.Administrador;
+import source.Cliente;
 import source.Controladora;
 
 import javax.swing.JMenuBar;
@@ -31,6 +32,9 @@ import java.awt.event.ActionEvent;
 public class Main extends JFrame {
 
 	private JPanel contentPane;
+	private Controladora miControladora = new Controladora();
+	private Cliente cliente = new Cliente("Nelcido","Diaz","123","calle13",null,12);
+	
 	/**
 	 * Launch the application.
 	 */
@@ -45,6 +49,9 @@ public class Main extends JFrame {
 				}
 			}
 		});
+	}
+	public void setControladora(Controladora controladora) {
+		miControladora = controladora;
 	}
 	/**
 	 * Create the frame.
@@ -86,7 +93,9 @@ public class Main extends JFrame {
 		mntmFacturar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				 Factura factura = new Factura();
+				 miControladora.insertarCliente(cliente);
 				 factura.setVisible(true);
+				 factura.setControladora(miControladora);
 			}
 		});
 		mntmFacturar.addMouseListener(new MouseAdapter() {

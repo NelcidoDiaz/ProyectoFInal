@@ -17,9 +17,12 @@ import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import source.Componente;
+import source.Controladora;
+import source.Cliente;
 import source.Combo;
 import java.awt.event.ItemListener;
 import java.lang.reflect.Field;
+import java.time.LocalDate;
 import java.awt.event.ItemEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -27,15 +30,23 @@ import source.DiscoDuro;
 import source.MemoriaRam;
 import source.TarjetaMadre;
 import source.MicroProcesador;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
+//import source.Factura;
 public class Factura extends JFrame {
-
+	LocalDate date = LocalDate.now();
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField txtNombre;
+	private JTextField txtApellido;
+	private JTextField txtCedula;
+	private JTextField txtDireccion;
 	private JTable tblElegidos;
+	private Cliente miCliente;
+	private ArrayList<Componente> componenteElegido = new ArrayList<Componente>();
+	private Controladora miControladora = new Controladora();
+	private ArrayList<Cliente> misClientes = new ArrayList<Cliente>();
 	private ArrayList<Componente> misComponentes = new ArrayList<Componente>();
 
 	// private
@@ -64,13 +75,61 @@ public class Factura extends JFrame {
 		this.misComponentes = misComponentes;
 	}
 
+	public void selectComponets() {
+
+	}
+
+	public void setClientes(ArrayList<Cliente> clientes) {
+		misClientes = clientes;
+	}
+
+	public void setControladora(Controladora controladora) {
+		miControladora = controladora;
+	}
+
+	public void adquirirObjetosComprados(ArrayList<Componente> componentes) {
+		componenteElegido = componentes;
+	}
+
+	private void borrar(String entrada) {
+		int contador = 0;
+		for (Componente componente : misComponentes) {
+			if (componente.getNumeroDeSerie().equalsIgnoreCase(entrada) == true) {
+				// misComponentes.remove(contador);
+			}
+			contador++;
+		}
+	}
+
 	/**
 	 * Create the frame.
 	 */
 	public Factura() {
+		DefaultTableModel model = new DefaultTableModel();
+
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				int contador = 0;
+				model.addColumn("Precio");
+				model.addColumn("Marca");
+				model.addColumn("NumeroDeSerie");
+				model.addColumn("cantReal");
+				model.addColumn("CantMax");
+				model.addColumn("cantMin");
+				model.addColumn("cantidad a comprar");
+				for (Componente componente : componenteElegido) {
+					model.insertRow(contador,
+							new Object[] { componente.getMarca(), componente.getPrecio(), componente.getNumeroDeSerie(),
+									componente.getDescuento(), componente.getCantReal(), componente.getCantMin(),
+									componente.getCantMax() });
+					// System.out.println(componente.getMarca());
+				}
+			}
+		});
 		setTitle("Hacer Pedido");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 746, 462);
+		setBounds(100, 100, 894, 462);
 		contentPane = new JPanel();
 		contentPane.setMaximumSize(new Dimension(2147483647, 2147483647));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -78,7 +137,7 @@ public class Factura extends JFrame {
 		contentPane.setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(12, 0, 712, 187);
+		panel.setBounds(12, 0, 870, 187);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
@@ -98,75 +157,91 @@ public class Factura extends JFrame {
 		lblNewLabel.setBounds(12, 144, 66, 15);
 		panel.add(lblNewLabel);
 
-		JLabel lblFacturas = new JLabel("Facturas");
-		lblFacturas.setBounds(352, 29, 66, 15);
-		panel.add(lblFacturas);
-
 		JLabel lblDireccion = new JLabel("Direccion");
 		lblDireccion.setBounds(12, 113, 66, 15);
 		panel.add(lblDireccion);
 
-		textField = new JTextField();
-		textField.setBounds(96, 27, 124, 19);
-		panel.add(textField);
-		textField.setColumns(10);
+		txtNombre = new JTextField();
+		txtNombre.setBounds(96, 27, 124, 19);
+		panel.add(txtNombre);
+		txtNombre.setColumns(10);
 
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(96, 57, 124, 19);
-		panel.add(textField_1);
+		txtApellido = new JTextField();
+		txtApellido.setColumns(10);
+		txtApellido.setBounds(96, 57, 124, 19);
+		panel.add(txtApellido);
 
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(96, 82, 124, 19);
-		panel.add(textField_2);
+		txtCedula = new JTextField();
+		txtCedula.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Cliente cliente = miControladora.buscCliente(txtCedula.getText());
+				if (cliente != null) {
+					txtNombre.setText(cliente.getNombre());
+					txtApellido.setText(cliente.getApellido());
+					txtDireccion.setText(cliente.getDireccion());
+				}
+			}
+		});
+		txtCedula.setColumns(10);
+		txtCedula.setBounds(96, 82, 124, 19);
+		panel.add(txtCedula);
 
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(96, 111, 124, 19);
-		panel.add(textField_3);
+		txtDireccion = new JTextField();
+		txtDireccion.setColumns(10);
+		txtDireccion.setBounds(96, 111, 124, 19);
+		panel.add(txtDireccion);
 
 		JLabel label = new JLabel("0");
 		label.setBounds(106, 144, 66, 15);
 		panel.add(label);
-
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(436, 24, 184, 24);
-		panel.add(comboBox);
 
 		JLabel lblProducto = new JLabel("Producto");
 		lblProducto.setBounds(352, 86, 66, 15);
 		panel.add(lblProducto);
 
 		JComboBox comboBox_1 = new JComboBox();
+		DiscoDuro disco = new DiscoDuro("kwai", 19, "13", 12, 2, 4, 5, "1000", 1123, "ssd");
+		misComponentes.add(disco);
 		comboBox_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String valor = comboBox_1.getSelectedItem().toString();
 				String Url = "";
+				ArrayList<Componente> componente = new ArrayList<Componente>();
 				ArrayList<String> misColumnas = new ArrayList<String>();
-				misColumnas.addAll(Arrays.asList("Marca", "Precio", "numeroDeSerie", "descuento", "cantReal",
-						"cantMin", "cantMax"));
+				misColumnas.addAll(Arrays.asList("Marca", "Precio", "numeroDeSerie", "descuento", "cantReal", "cantMin",
+						"cantMax"));
 				switch (valor) {
 				case "Disco Duro":
 					misColumnas.addAll(Arrays.asList("Modelo", "Almacenamiento", "tipoDeConexion"));
 					Url = "/visual/imagenes/DiscoDuro-1.jpg";
-                    break;
+					for (Componente component : misComponentes) {
+						if (component instanceof DiscoDuro) {
+							componente.add(component);
+						}
+					}
+					break;
 				case "Memoria Ram":
 					misColumnas.addAll(Arrays.asList("Cantidad de Memoria", "Tipo De Memoria"));
 					Url = "/visual/imagenes/MemoriaRam-1.jpg";
-                    break;
+					break;
 				case "Tarjeta Madre":
-					misColumnas.addAll(Arrays.asList("Tipos de conexion","Tipo De Conector","Tipo De Memoria"));
+					misColumnas.addAll(Arrays.asList("Tipos de conexion", "Tipo De Conector", "Tipo De Memoria"));
 					Url = "/visual/imagenes/TarjetaMadre-1.jpg";
-                    break;
+					break;
 				case "Micro Procesador":
-					misColumnas.addAll(Arrays.asList("modelo","socket","velocidad"));
+					misColumnas.addAll(Arrays.asList("modelo", "socket", "velocidad"));
 					Url = "/visual/imagenes/MicroProcesador-1.jpg";
 					break;
 				}
 				ElegirProductos productos = new ElegirProductos();
 				productos.getImages(Url);
-				productos.setVisible(true);   
+				productos.getComponentes(componente);
+
+				productos.setVisible(true);
+				productos.setTipoDeComponente(valor);
+				productos.setTodosComponentes(misComponentes);
+				productos.setClientes(misClientes);
+				productos.setControladora(miControladora);
 				productos.getColumns(misColumnas);
 				dispose();
 			}
@@ -186,15 +261,38 @@ public class Factura extends JFrame {
 		panel.add(comboBox_1);
 
 		tblElegidos = new JTable();
-		tblElegidos.setBounds(12, 207, 511, 206);
+		tblElegidos.setModel(model);
+
+		tblElegidos.setBounds(12, 207, 716, 206);
 		contentPane.add(tblElegidos);
 
 		JButton btnFacturar = new JButton("Facturar");
-		btnFacturar.setBounds(571, 228, 114, 25);
+		btnFacturar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				source.Factura factura = new source.Factura("12", miCliente, 100, date, componenteElegido);
+				miControladora.insertarFactura(factura, 1);
+				System.out.println(factura.getTotal());
+				int contador = 0;
+				model.setRowCount(0);
+				for (Componente componenteElegido : componenteElegido) {
+					borrar(componenteElegido.getNumeroDeSerie());
+				}
+             
+			}
+
+		});
+		btnFacturar.setBounds(740, 249, 114, 25);
 		contentPane.add(btnFacturar);
 
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(571, 344, 114, 25);
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Main main = new Main();
+				
+				main.setVisible(true);
+			}
+		});
+		btnCancelar.setBounds(740, 352, 114, 25);
 		contentPane.add(btnCancelar);
 	}
 }
