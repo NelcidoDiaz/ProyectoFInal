@@ -25,7 +25,6 @@ import source.TarjetaMadre;
 import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -37,6 +36,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JCheckBox;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class RegistroComponentes extends JFrame {
 
@@ -182,6 +183,18 @@ public class RegistroComponentes extends JFrame {
 		txtNoSerie.setColumns(10);
 		
 		txtPrecio = new JTextField();
+		txtPrecio.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char validar = e.getKeyChar();
+				if(!Character.isDigit(validar) && validar != '.') {
+					e.consume();
+				}
+				if(validar == '.' && txtPrecio.getText().contains(".")) {
+					e.consume();
+				}
+			}
+		});
 		txtPrecio.setBounds(102, 81, 127, 20);
 		panel.add(txtPrecio);
 		txtPrecio.setColumns(10);
@@ -286,6 +299,18 @@ public class RegistroComponentes extends JFrame {
 		pnlMicroprocesador.add(lblVelocProces);
 		
 		txtVelocProces = new JTextField();
+		txtVelocProces.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char validar = e.getKeyChar();
+				if(!Character.isDigit(validar) && validar != '.') {
+					e.consume();
+				}
+				if(validar == '.' && txtPrecio.getText().contains(".")) {
+					e.consume();
+				}
+			}
+		});
 		txtVelocProces.setBounds(160, 112, 79, 20);
 		pnlMicroprocesador.add(txtVelocProces);
 		txtVelocProces.setColumns(10);
@@ -313,6 +338,15 @@ public class RegistroComponentes extends JFrame {
 		pnlMemoriaRam.add(lblTipoMemoriaRAM);
 		
 		txtCantMemoria = new JTextField();
+		txtCantMemoria.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char validar = e.getKeyChar();
+				if(!Character.isDigit(validar)) {
+					e.consume();
+				}
+			}
+		});
 		txtCantMemoria.setBounds(100, 27, 86, 20);
 		pnlMemoriaRam.add(txtCantMemoria);
 		txtCantMemoria.setColumns(10);
@@ -423,6 +457,15 @@ public class RegistroComponentes extends JFrame {
 		txtModeloDisk.setColumns(10);
 		
 		txtAlmacen = new JTextField();
+		txtAlmacen.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char validar = e.getKeyChar();
+				if(!Character.isDigit(validar)) {
+					e.consume();
+				}
+			}
+		});
 		txtAlmacen.setBounds(107, 71, 105, 20);
 		pnlDiscoDuro.add(txtAlmacen);
 		txtAlmacen.setColumns(10);
@@ -495,6 +538,18 @@ public class RegistroComponentes extends JFrame {
 		panel.add(btnCancelar);
 		
 		txtDescuento = new JTextField();
+		txtDescuento.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char validar = e.getKeyChar();
+				if(!Character.isDigit(validar) && validar != '.') {
+					e.consume();
+				}
+				if(validar == '.' && txtDescuento.getText().contains(".")) {
+					e.consume();
+				}
+			}
+		});
 		txtDescuento.setBounds(375, 81, 86, 20);
 		panel.add(txtDescuento);
 		txtDescuento.setColumns(10);
