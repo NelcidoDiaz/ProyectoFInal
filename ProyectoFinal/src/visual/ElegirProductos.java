@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
@@ -16,13 +17,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import source.Componente;
+import java.awt.event.WindowStateListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ElegirProductos extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
+	
     private ArrayList <Componente>  misComponentes;
-    private String [] Columnas;
+    private ArrayList <String> Columnas;
+   // private final 
+   
 	/**
 	 * Launch the application.
 	 */
@@ -38,7 +46,7 @@ public class ElegirProductos extends JFrame {
 			}
 		});
 	}
-   public void getColumns(String [] columnas) { 
+   public void getColumns(ArrayList <String> columnas) { 
 		Columnas = columnas;
    }
    public void getComponentes(ArrayList <Componente> compenentes) {
@@ -48,6 +56,30 @@ public class ElegirProductos extends JFrame {
 	 * Create the frame.
 	 */
 	public ElegirProductos() {
+		  
+		 DefaultTableModel model = new DefaultTableModel();
+		 
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				 for(String columna : Columnas) {
+						model.addColumn(columna);
+						System.out.println(columna);
+					 }
+			
+			}
+			
+		});
+		
+		addWindowStateListener(new WindowStateListener() {
+			
+			public void windowStateChanged(WindowEvent arg0) {
+			
+			 
+				
+			}
+
+		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 619, 435);
 		contentPane = new JPanel();
@@ -55,9 +87,6 @@ public class ElegirProductos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		table = new JTable();
-		table.setBounds(12, 12, 293, 370);
-		contentPane.add(table);
         
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(475, 204, 110, 24);
@@ -70,7 +99,7 @@ public class ElegirProductos extends JFrame {
 		JButton btnComprar = new JButton("Comprar");
 		btnComprar.setBounds(471, 305, 114, 25);
 		contentPane.add(btnComprar);
-		
+		 
 		JLabel lblDescuento = new JLabel("Descuento");
 		lblDescuento.setBounds(357, 263, 86, 15);
 		contentPane.add(lblDescuento);
@@ -79,10 +108,15 @@ public class ElegirProductos extends JFrame {
 		label.setBounds(493, 263, 66, 15);
 		contentPane.add(label);
 		
+	
 		JLabel lblImagen = new JLabel("");
 		lblImagen.setIcon(new ImageIcon(ElegirProductos.class.getResource("/visual/imagenes/White-Background.png")));
 		lblImagen.setBounds(336, 12, 249, 153);
 		contentPane.add(lblImagen);
+		JTable table = new JTable(model);
+		table.setBounds(12, 23, 282, 363);
+		contentPane.add(table);
+		table.setModel(model);
 		
 	}
 }
