@@ -1,9 +1,15 @@
 package source;
 
+import java.io.Serializable;
+
 import exception.NotNegativeNumberExeption;
 
-public abstract class Componente {
-	 protected String marca;
+public abstract class Componente implements Serializable {
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6880277541572155050L;
+	protected String marca;
 	 protected float precio;
 	 protected String numeroDeSerie;
 	 protected float descuento;
@@ -97,6 +103,12 @@ public abstract class Componente {
 		}else {
 			throw new NotNegativeNumberExeption();
 		}
+	}
+	
+	public float calcpreciotot() {
+		float total = precio;
+		total = precio + (precio*descuento);
+		return total;
 	}
 	
 	 

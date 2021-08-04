@@ -1,8 +1,14 @@
 package source;
 
+import java.io.Serializable;
+
 import exception.NotNegativeNumberExeption;
 
-public class OrdenCompra {
+public class OrdenCompra implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3528765080551936752L;
 	private String id;
 	private Componente componentes;
 	private int cant;

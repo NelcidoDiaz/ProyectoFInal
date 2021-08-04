@@ -3,6 +3,10 @@ package source;
 import exception.NotNegativeNumberExeption;
 
 public class MicroProcesador extends Componente {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3717724472197826477L;
 	private String modelo;
 	 private String socket;
 	 private float velocProcs;

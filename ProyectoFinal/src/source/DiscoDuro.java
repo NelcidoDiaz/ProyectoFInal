@@ -3,6 +3,10 @@ package source;
 import exception.NotNegativeNumberExeption;
 
 public class DiscoDuro extends Componente {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7765900768722322085L;
 	private String modelo;
 	private int capaAlmacenamiento;
 	private String tipoDeConexion;

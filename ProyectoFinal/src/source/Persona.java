@@ -1,6 +1,12 @@
 package source;
 
-public class Persona {
+import java.io.Serializable;
+
+public class Persona implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7300474796451438676L;
 	private String nombre;
 	private String apellido;
 	private String cedula;
@@ -10,6 +16,7 @@ public class Persona {
 		this.apellido = apellido;
 		this.cedula = cedula;
 	}
+	
 	public String getNombre() {
 		return nombre;
 	}

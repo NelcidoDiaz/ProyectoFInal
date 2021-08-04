@@ -17,11 +17,11 @@ public class ListarClientes extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField txtNombre;
+	private JTextField txtApellido;
+	private JTextField txtCedula;
+	private JTextField txtDireccion;
+	private JTextField txtCredito;
 	private JTextField textField_5;
 
 	/**
@@ -92,30 +92,30 @@ public class ListarClientes extends JFrame {
 		btnNewButton_1.setBounds(926, 483, 130, 27);
 		contentPane.add(btnNewButton_1);
 		
-		textField = new JTextField();
-		textField.setBounds(185, 34, 190, 27);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtNombre = new JTextField();
+		txtNombre.setBounds(185, 34, 190, 27);
+		contentPane.add(txtNombre);
+		txtNombre.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(185, 152, 190, 27);
-		contentPane.add(textField_1);
+		txtApellido = new JTextField();
+		txtApellido.setColumns(10);
+		txtApellido.setBounds(185, 152, 190, 27);
+		contentPane.add(txtApellido);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(185, 261, 190, 27);
-		contentPane.add(textField_2);
+		txtCedula = new JTextField();
+		txtCedula.setColumns(10);
+		txtCedula.setBounds(185, 261, 190, 27);
+		contentPane.add(txtCedula);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(660, 34, 190, 27);
-		contentPane.add(textField_3);
+		txtDireccion = new JTextField();
+		txtDireccion.setColumns(10);
+		txtDireccion.setBounds(660, 34, 190, 27);
+		contentPane.add(txtDireccion);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(660, 156, 190, 27);
-		contentPane.add(textField_4);
+		txtCredito = new JTextField();
+		txtCredito.setColumns(10);
+		txtCredito.setBounds(660, 156, 190, 27);
+		contentPane.add(txtCredito);
 		
 		textField_5 = new JTextField();
 		textField_5.setColumns(10);

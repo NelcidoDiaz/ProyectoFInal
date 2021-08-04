@@ -12,25 +12,32 @@ import javax.swing.JSpinner;
 import javax.swing.JComboBox;
 import java.awt.Font;
 
-import javax.naming.ldap.Rdn;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.TitledBorder;
 
+import source.Componente;
 import source.Controladora;
 import source.DiscoDuro;
 import source.MemoriaRam;
 import source.MicroProcesador;
 import source.TarjetaMadre;
 
-import javax.swing.SpinnerNumberModel;
 import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
-import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JCheckBox;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class RegistroComponentes extends JFrame {
 
@@ -50,7 +57,6 @@ public class RegistroComponentes extends JFrame {
 	private JSpinner spnCantReal;
 	private JSpinner spnCantMin;
 	private JSpinner spnCantMax;
-	private JSpinner spnDescuento;
 	private JPanel pnlDiscoDuro;
 	private JPanel pnlMicroprocesador;
 	private JPanel pnlComponente;
@@ -66,6 +72,7 @@ public class RegistroComponentes extends JFrame {
 	private JCheckBox chckbxNVMe;
 	private JCheckBox chckbxSATA2;
 	private JComboBox cmbTipoConexion;
+	private JTextField txtDescuento;
 
 	/**
 	 * Launch the application.
@@ -73,6 +80,35 @@ public class RegistroComponentes extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				FileInputStream control;
+				FileOutputStream control2;
+				ObjectInputStream controlRead;
+				ObjectOutputStream controlWrite;
+				try {
+					control = new FileInputStream ("Tienda.dat");
+					controlRead = new ObjectInputStream(control);
+					Controladora temp = (Controladora)controlRead.readObject();
+					Controladora.setControl(temp);
+					control.close();
+					controlRead.close();
+				} catch (FileNotFoundException e) {
+					try {
+						control2 = new  FileOutputStream("Tienda.dat");
+						controlWrite = new ObjectOutputStream(control2);
+						controlWrite.writeObject(Controladora.getInstance());
+						control2.close();
+						controlWrite.close();
+					} catch (FileNotFoundException e1) {
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+					}
+				} catch (IOException e) {
+					
+					
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				try {
 					RegistroComponentes frame = new RegistroComponentes();
 					frame.setVisible(true);
@@ -147,6 +183,18 @@ public class RegistroComponentes extends JFrame {
 		txtNoSerie.setColumns(10);
 		
 		txtPrecio = new JTextField();
+		txtPrecio.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char validar = e.getKeyChar();
+				if(!Character.isDigit(validar) && validar != '.') {
+					e.consume();
+				}
+				if(validar == '.' && txtPrecio.getText().contains(".")) {
+					e.consume();
+				}
+			}
+		});
 		txtPrecio.setBounds(102, 81, 127, 20);
 		panel.add(txtPrecio);
 		txtPrecio.setColumns(10);
@@ -223,12 +271,6 @@ public class RegistroComponentes extends JFrame {
 		chckbxNVMe.setBounds(333, 129, 65, 23);
 		pnlTarjetaMadre.add(chckbxNVMe);
 		
-		spnDescuento = new JSpinner();
-		spnDescuento.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		spnDescuento.setModel(new SpinnerNumberModel(0, 0, 100, 1));
-		spnDescuento.setBounds(386, 80, 56, 20);
-		panel.add(spnDescuento);
-		
 		pnlMicroprocesador = new JPanel();
 		pnlMicroprocesador.setVisible(false);
 		pnlMicroprocesador.setBounds(10, 230, 517, 172);
@@ -257,6 +299,18 @@ public class RegistroComponentes extends JFrame {
 		pnlMicroprocesador.add(lblVelocProces);
 		
 		txtVelocProces = new JTextField();
+		txtVelocProces.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char validar = e.getKeyChar();
+				if(!Character.isDigit(validar) && validar != '.') {
+					e.consume();
+				}
+				if(validar == '.' && txtPrecio.getText().contains(".")) {
+					e.consume();
+				}
+			}
+		});
 		txtVelocProces.setBounds(160, 112, 79, 20);
 		pnlMicroprocesador.add(txtVelocProces);
 		txtVelocProces.setColumns(10);
@@ -284,6 +338,15 @@ public class RegistroComponentes extends JFrame {
 		pnlMemoriaRam.add(lblTipoMemoriaRAM);
 		
 		txtCantMemoria = new JTextField();
+		txtCantMemoria.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char validar = e.getKeyChar();
+				if(!Character.isDigit(validar)) {
+					e.consume();
+				}
+			}
+		});
 		txtCantMemoria.setBounds(100, 27, 86, 20);
 		pnlMemoriaRam.add(txtCantMemoria);
 		txtCantMemoria.setColumns(10);
@@ -394,6 +457,15 @@ public class RegistroComponentes extends JFrame {
 		txtModeloDisk.setColumns(10);
 		
 		txtAlmacen = new JTextField();
+		txtAlmacen.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char validar = e.getKeyChar();
+				if(!Character.isDigit(validar)) {
+					e.consume();
+				}
+			}
+		});
 		txtAlmacen.setBounds(107, 71, 105, 20);
 		pnlDiscoDuro.add(txtAlmacen);
 		txtAlmacen.setColumns(10);
@@ -414,7 +486,7 @@ public class RegistroComponentes extends JFrame {
 				String marca = txtMarca.getText();
 				String numSerie = txtNoSerie.getText();
 				float precio = Float.valueOf(txtPrecio.getText());
-				float descuento = (Float) spnDescuento.getValue() ;
+				float descuento = Float.valueOf(txtDescuento.getText()) ;
 				int cantReal = (int) spnCantReal.getValue();
 				int cantMin = (int) spnCantMin.getValue();
 				int cantMax = (int) spnCantMax.getValue();
@@ -422,21 +494,21 @@ public class RegistroComponentes extends JFrame {
 					int cantMemoria = Integer.valueOf(txtCantMemoria.getText());
 					String tipoMemoria = txtTipoMemoriaRAM.getText();
 					MemoriaRam ram = new MemoriaRam(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, cantMemoria, tipoMemoria);
-					Controladora.getInstance().getMisComponentes().add(ram);
+					Controladora.getInstance().insertarComponente(ram);
 				}
 				else if(rdbtnDiscoDuro.isSelected()) {
 					String modelo = txtModeloDisk.getText();
 					int capAlmacen = Integer.valueOf(txtAlmacen.getText());
 					String tipoConexion = String.valueOf(cmbTipoConexion.getSelectedItem());
 					DiscoDuro disk = new DiscoDuro(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, modelo, capAlmacen, tipoConexion);
-					Controladora.getInstance().getMisComponentes().add(disk);
+					Controladora.getInstance().insertarComponente(disk);
 				}
 				else if(rdbtnMicroprocesador.isSelected()) {
 					String modelo = txtModelo.getText();
 					String socket = txtSocket.getText();
 					float velcProcs = Float.parseFloat(txtVelocProces.getText());
 					MicroProcesador cpu = new MicroProcesador(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, modelo, socket, velcProcs);
-					Controladora.getInstance().getMisComponentes().add(cpu);
+					Controladora.getInstance().insertarComponente(cpu);
 				}
 				else if(rdbtnTarjetaMadre.isSelected()) {
 					String tipoConector = txtConector.getText();
@@ -444,9 +516,10 @@ public class RegistroComponentes extends JFrame {
 					String [] tipoConexion = new String [5];
 					String [] conexiones = llenarConexionTarjMadre(tipoConexion);
 					TarjetaMadre madre = new TarjetaMadre(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, tipoConector, tipoMemoria, conexiones);
-					Controladora.getInstance().getMisComponentes().add(madre);
-					
+					Controladora.getInstance().insertarComponente(madre);
 				}
+				
+				JOptionPane.showMessageDialog(null, "Componente registrado", "Informacion",JOptionPane.INFORMATION_MESSAGE);
 				limpiar();
 			}
 		});
@@ -463,6 +536,23 @@ public class RegistroComponentes extends JFrame {
 		});
 		btnCancelar.setBounds(419, 413, 89, 23);
 		panel.add(btnCancelar);
+		
+		txtDescuento = new JTextField();
+		txtDescuento.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char validar = e.getKeyChar();
+				if(!Character.isDigit(validar) && validar != '.') {
+					e.consume();
+				}
+				if(validar == '.' && txtDescuento.getText().contains(".")) {
+					e.consume();
+				}
+			}
+		});
+		txtDescuento.setBounds(375, 81, 86, 20);
+		panel.add(txtDescuento);
+		txtDescuento.setColumns(10);
 	}
 	
 	private String[] llenarConexionTarjMadre (String[] tipoConexion) {
@@ -494,7 +584,16 @@ public class RegistroComponentes extends JFrame {
 		txtMarca.setText("");
 		txtNoSerie.setText("");
 		txtPrecio.setText("");
-		spnDescuento.setValue(0);
+		txtDescuento.setText("");
+		txtAlmacen.setText("");
+		txtCantMemoria.setText("");
+		txtConector.setText("");
+		txtMemoria.setText("");
+		txtModelo.setText("");
+		txtModeloDisk.setText("");
+		txtSocket.setText("");
+		txtTipoMemoriaRAM.setText("");
+		txtVelocProces.setText("");
 		spnCantMax.setValue(0);
 		spnCantMin.setValue(0);
 		spnCantReal.setValue(0);
@@ -502,5 +601,10 @@ public class RegistroComponentes extends JFrame {
 		rdbtnDiscoDuro.setSelected(false);
 		rdbtnMicroprocesador.setSelected(false);
 		rdbtnTarjetaMadre.setSelected(false);
+		chckbxNVMe.setSelected(false);
+		chckbxIDE.setSelected(false);
+		chckbxSATA.setSelected(false);
+		chckbxSATA2.setSelected(false);
+		chckbxSATA3.setSelected(false);
 	}
 }
