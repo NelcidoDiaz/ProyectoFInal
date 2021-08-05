@@ -40,6 +40,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JRadioButton;
 
 public class ElegirProductos extends JFrame {
 
@@ -55,6 +56,8 @@ public class ElegirProductos extends JFrame {
 	private String tipoDeComponentes;
 	private ArrayList<String> Columnas = new ArrayList<String>();
 	private JTable table;
+	private JRadioButton rdbtnCombo;
+	private JRadioButton rdbtnFactura;
 	// private final
 
 	/**
@@ -242,19 +245,51 @@ public class ElegirProductos extends JFrame {
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			 Factura factura = new Factura();
-			 factura.adquirirObjetosComprados(componentesElegidos);
-			 factura.setVisible(true);
+				if(rdbtnFactura.isSelected()) {
+					Factura factura = new Factura();
+					factura.adquirirObjetosComprados(componentesElegidos);
+					factura.setVisible(true);
 			 
-			 factura.setComponentes(todosComponentes);
-			 factura.setClientes(misClientes);
+					factura.setComponentes(todosComponentes);
+					factura.setClientes(misClientes);
 		     
-			 factura.setControladora(miControladora);
+					factura.setControladora(miControladora);
+				}
+				else if(rdbtnCombo.isSelected()) {
+					RegCombos combo = new RegCombos();
+					combo.adquirirObjetos(componentesElegidos);
+					combo.setVisible(true);
+					combo.setComponentes(todosComponentes);
+					combo.setControladora(miControladora);
+				}
+			 
 			 dispose();
 			}
 		});
 		btnSalir.setBounds(885, 286, 114, 25);
 		contentPane.add(btnSalir);
+		
+		JLabel lblSeleccion = new JLabel("Selecci\u00F3n:");
+		lblSeleccion.setBounds(721, 85, 55, 14);
+		contentPane.add(lblSeleccion);
+		
+		rdbtnFactura = new JRadioButton("Factura");
+		rdbtnFactura.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rdbtnCombo.setSelected(false);
+			}
+		});
+		rdbtnFactura.setBounds(797, 81, 77, 23);
+		contentPane.add(rdbtnFactura);
+		
+		rdbtnCombo = new JRadioButton("Combo");
+		rdbtnCombo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rdbtnFactura.setSelected(false);
+			}
+		});
+		rdbtnCombo.setBounds(902, 81, 77, 23);
+		contentPane.add(rdbtnCombo);
 
 	}
 }
