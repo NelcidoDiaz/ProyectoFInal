@@ -158,9 +158,23 @@ public class Main extends JFrame {
 		mnAdministrador.add(mnCombos);
 		
 		JMenuItem mntmRegCombo = new JMenuItem("Crear Combo");
+		mntmRegCombo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegCombos frame = new RegCombos();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+			}
+		});
 		mnCombos.add(mntmRegCombo);
 		
 		JMenuItem mntmListCombo = new JMenuItem("Lista Combos");
+		mntmListCombo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListCombos frame = new ListCombos();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+			}
+		});
 		mnCombos.add(mntmListCombo);
 		
 		JMenu mnEmpleados = new JMenu("Empleados");

@@ -181,6 +181,17 @@ public class Controladora implements Serializable {
 	  }
 	  return null;
 	}
+	
+	public Combo buscCombo(String nombre) {
+		for(Combo comb: misCombos) {
+			if(comb!=null) {
+				if(comb.getNombre().equalsIgnoreCase(nombre)) {
+					return comb;
+				}
+			}
+		}
+		return null;
+	}
 
 	public Factura buscFactura(String codFac) {
 		 for(Factura factura : misFacturas) {

@@ -116,7 +116,7 @@ public class Login extends JFrame {
 					dispose();
 				}
 				else{
-					JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta");
+					JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta" );
 				}
 			}
 		});

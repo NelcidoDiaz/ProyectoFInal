@@ -48,7 +48,7 @@ public class Combo{
 
 	public float calcValComb() {
 		float combo = 0;
-		combo = calcPrecioTotal() - calcPrecioTotal() * descuento;
+		combo = calcPrecioTotal() - calcPrecioTotal() * (descuento/100);
 		return combo;
 	}
 

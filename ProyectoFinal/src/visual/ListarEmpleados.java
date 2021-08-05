@@ -96,8 +96,6 @@ public class ListarEmpleados extends JFrame {
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main frame = new Main();
-				frame.setVisible(true);
 				dispose();
 			}
 		});

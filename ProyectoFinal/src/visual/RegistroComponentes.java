@@ -529,8 +529,6 @@ public class RegistroComponentes extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main Frame = new Main();
-				Frame.setVisible(true);
 				dispose();
 			}
 		});

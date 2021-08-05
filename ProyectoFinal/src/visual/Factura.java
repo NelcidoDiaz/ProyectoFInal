@@ -288,8 +288,8 @@ public class Factura extends JFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Main main = new Main();
-				
 				main.setVisible(true);
+				dispose();
 			}
 		});
 		btnCancelar.setBounds(740, 352, 114, 25);
