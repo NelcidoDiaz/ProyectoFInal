@@ -48,10 +48,10 @@ public class ElegirProductos extends JFrame {
 
 	
 	private String Url;
-	//private ArrayList <Cliente> misClientes = new ArrayList <Cliente>();
+	private ArrayList <Cliente> misClientes = new ArrayList <Cliente>();
 	private ArrayList<Componente> misComponentes =  new ArrayList <Componente>();
-	//private Controladora miControladora = new Controladora();
-	//private ArrayList<Componente> todosComponentes = new ArrayList <Componente>();
+	private Controladora miControladora = new Controladora();
+	private ArrayList<Componente> todosComponentes = new ArrayList <Componente>();
 	private ArrayList<Componente> componentesElegidos = new ArrayList <Componente>();
 	private String tipoDeComponentes;
 	private ArrayList<String> Columnas = new ArrayList<String>();
