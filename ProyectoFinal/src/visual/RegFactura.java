@@ -274,8 +274,9 @@ public class RegFactura extends JFrame {
 			
 			
 				source.Factura factura = new source.Factura("12", null, 100, date, componenteElegido);
-			    final Cliente miCliente = new Cliente(txtNombre.getText(),txtApellido.getText(),txtCedula.getText(),txtDireccion.getText(),factura,Float.parseFloat(label.getText()));
+			    final Cliente miCliente = new Cliente(txtNombre.getText(),txtApellido.getText(),txtCedula.getText(),txtDireccion.getText(),null,Float.parseFloat(label.getText()));
 			    factura.setCliente(miCliente);
+			    miCliente.setMisFacturas(factura);
 				Controladora.getInstance().insertarCliente(miCliente);
 				Controladora.getInstance().insertarFactura(factura, 1);
 				int contador = 0;
