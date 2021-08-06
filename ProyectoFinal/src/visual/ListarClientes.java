@@ -66,9 +66,13 @@ public class ListarClientes extends JFrame {
 			public void windowActivated(WindowEvent e) {
 			int contador = 0;
 			for (Cliente cliente: Controladora.getInstance().getMisClientes()) {
-				 
-					model.insertRow(contador,
-							new Object[] { cliente.getCedula(),cliente.getNombre(),cliente.getApellido(),cliente.getCredito()});
+				 if(cliente != null) {
+					 model.insertRow(contador,
+								new Object[] { cliente.getCedula(),cliente.getNombre(),cliente.getApellido(),cliente.getCredito()});	 
+				 }
+				 else {
+					 break;
+				 }
 				}
 			}
 		});
@@ -112,7 +116,7 @@ public class ListarClientes extends JFrame {
 				"Cedula", "Nombre", "Apellido", "Direccion", "Credito"
 			}
 		));
-		table.setBounds(31, 316, 1008, 319);
+		table.setBounds(31, 316, 835, 319);
 		contentPane.add(table);
 		
 		txtNombre = new JTextField();
@@ -158,5 +162,16 @@ public class ListarClientes extends JFrame {
 		txtCredito.setColumns(10);
 		txtCredito.setBounds(660, 156, 190, 27);
 		contentPane.add(txtCredito);
+		
+		JButton btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			 Main frame = new Main();
+			 frame.setVisible(true);
+			 dispose();
+			}
+		});
+		btnSalir.setBounds(918, 446, 114, 25);
+		contentPane.add(btnSalir);
 	}
 }

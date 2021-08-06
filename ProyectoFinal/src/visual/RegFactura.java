@@ -43,7 +43,7 @@ public class RegFactura extends JFrame {
 	private JTextField txtCedula;
 	private JTextField txtDireccion;
 	private JTable tblElegidos;
-	private Cliente miCliente;
+	
 	private ArrayList<Componente> componenteElegido = new ArrayList<Componente>();
 	 
 
@@ -271,14 +271,19 @@ public class RegFactura extends JFrame {
 		JButton btnFacturar = new JButton("Facturar");
 		btnFacturar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				source.Factura factura = new source.Factura("12", miCliente, 100, date, componenteElegido);
+			
+			
+				source.Factura factura = new source.Factura("12", null, 100, date, componenteElegido);
+			    final Cliente miCliente = new Cliente(txtNombre.getText(),txtApellido.getText(),txtCedula.getText(),txtDireccion.getText(),factura,Float.parseFloat(label.getText()));
+			    factura.setCliente(miCliente);
+				Controladora.getInstance().insertarCliente(miCliente);
 				Controladora.getInstance().insertarFactura(factura, 1);
 				int contador = 0;
 				model.setRowCount(0);
 				for (Componente componenteElegido : componenteElegido) {
 					borrar(componenteElegido.getNumeroDeSerie());
 				}
-             
+              
 			}
 
 		});

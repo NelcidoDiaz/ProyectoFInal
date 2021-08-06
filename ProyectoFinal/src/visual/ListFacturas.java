@@ -58,9 +58,14 @@ public class ListFacturas extends JFrame {
 				model.addColumn("Fecha");
 				model.addColumn("Total");
 				for (Factura factura : Controladora.getInstance().getMisFacturas()) {
-					model.insertRow(contador,
-							new Object[] {factura.getCodFactura(),factura.getCliente().getCedula(), factura.getCliente().getNombre(),
-										  factura.getFecha(),factura.getTotal()});
+					if(factura != null) {
+						model.insertRow(contador,
+								new Object[] {factura.getCodFactura(),factura.getCliente().getCedula(), factura.getCliente().getNombre(),
+											  factura.getFecha(),factura.getTotal()});
+					}else {
+						break;
+					}
+				
 				}
 			}
 		});

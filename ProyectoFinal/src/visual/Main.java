@@ -125,11 +125,16 @@ public class Main extends JFrame {
 		mnVendedor.add(mnClientes);
 		
 		JMenuItem mntmListClientes = new JMenuItem("Lista Clientes");
+		mntmListClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				 ListarClientes listarClientes = new ListarClientes();
+				 listarClientes.setVisible(true);
+			}
+		});
 		mntmListClientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			 ListarClientes listarClientes = new ListarClientes();
-			 listarClientes.setVisible(true);
+		
 			}
 		});
 		mnClientes.add(mntmListClientes);
