@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import source.Administrador;
 import source.Cliente;
 import source.Controladora;
+import source.OrdenCompra;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -26,13 +27,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JButton;
 
 public class Main extends JFrame {
 
 	private JPanel contentPane;
 	private Controladora miControladora = new Controladora();
+	private source.Factura miFactura =  null;
 	private Cliente cliente = new Cliente("Nelcido","Diaz","123","calle13",null,12);
 	
 	/**
@@ -206,5 +210,21 @@ public class Main extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JButton btnAceptarPedido = new JButton("Aceptar\r\n Pedido");
+		btnAceptarPedido.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean aceptado = false;
+				int i = 0;
+				while(!aceptado && i < miFactura.getComponentes().size()) {
+					if(miControladora.hacerPedido(miFactura.getComponentes().get(i).getNumeroDeSerie())) {
+						OrdenCompra aux = new OrdenCompra(String.valueOf(i),miFactura.getComponentes().get(i), miFactura.getComponentes().get(i).getMarca());
+						miControladora.aumentarCompInsideOrden(aux);
+					}
+				}
+			}
+		});
+		btnAceptarPedido.setBounds(307, 74, 117, 40);
+		contentPane.add(btnAceptarPedido);
 	}
 }

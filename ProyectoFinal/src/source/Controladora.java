@@ -150,7 +150,7 @@ public class Controladora implements Serializable {
 		misEmpleados.add(empleado);
 	}
 	
-	public void aumentarCompInsideOrden(OrdenCompra compra, boolean aceptada) {
+	public void aumentarCompInsideOrden(OrdenCompra compra) {
 		boolean existe = false;
 		int i = 0;
 		while(!existe && i < misComponentes.size()) {
@@ -166,7 +166,7 @@ public class Controladora implements Serializable {
 		boolean pedido = false;
 		Componente componentes = buscComponente(numSerie);
 		if(componentes!=null) {
-			if(componentes.cantReal < componentes.cantMin) {
+			if(componentes.cantReal <= componentes.cantMin) {
 				pedido = true;
 			}
 		}
