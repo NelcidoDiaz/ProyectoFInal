@@ -179,7 +179,7 @@ public class ElegirProductos extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblCantidad = new JLabel("Cantidad");
-		lblCantidad.setBounds(722, 183, 66, 15);
+		lblCantidad.setBounds(722, 225, 66, 15);
 		contentPane.add(lblCantidad);
 		JSpinner spinner = new JSpinner();
 		JButton btnComprar = new JButton("Comprar");
@@ -208,15 +208,15 @@ public class ElegirProductos extends JFrame {
 				}
 			}
 		});
-		btnComprar.setBounds(727, 286, 114, 25);
+		btnComprar.setBounds(722, 325, 114, 25);
 		contentPane.add(btnComprar);
 
 		JLabel lblDescuento = new JLabel("Descuento");
-		lblDescuento.setBounds(722, 237, 86, 15);
+		lblDescuento.setBounds(722, 279, 86, 15);
 		contentPane.add(lblDescuento);
 
 		JLabel label = new JLabel("0");
-		label.setBounds(838, 237, 66, 15);
+		label.setBounds(932, 279, 66, 15);
 		contentPane.add(label);
 
 		table = new JTable(model);
@@ -239,7 +239,7 @@ public class ElegirProductos extends JFrame {
 		contentPane.add(table);
 
 		spinner.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
-		spinner.setBounds(832, 181, 86, 20);
+		spinner.setBounds(891, 223, 86, 20);
 		contentPane.add(spinner);
 
 		JButton btnSalir = new JButton("Salir");
@@ -266,11 +266,11 @@ public class ElegirProductos extends JFrame {
 			 dispose();
 			}
 		});
-		btnSalir.setBounds(885, 286, 114, 25);
+		btnSalir.setBounds(884, 325, 114, 25);
 		contentPane.add(btnSalir);
 		
 		JLabel lblSeleccion = new JLabel("Selecci\u00F3n:");
-		lblSeleccion.setBounds(721, 85, 67, 14);
+		lblSeleccion.setBounds(722, 170, 148, 14);
 		contentPane.add(lblSeleccion);
 		
 		rdbtnFactura = new JRadioButton("Factura");
@@ -279,7 +279,7 @@ public class ElegirProductos extends JFrame {
 				rdbtnCombo.setSelected(false);
 			}
 		});
-		rdbtnFactura.setBounds(797, 81, 77, 23);
+		rdbtnFactura.setBounds(859, 166, 77, 23);
 		contentPane.add(rdbtnFactura);
 		
 		rdbtnCombo = new JRadioButton("Combo");
@@ -288,7 +288,7 @@ public class ElegirProductos extends JFrame {
 				rdbtnFactura.setSelected(false);
 			}
 		});
-		rdbtnCombo.setBounds(902, 81, 77, 23);
+		rdbtnCombo.setBounds(989, 166, 77, 23);
 		contentPane.add(rdbtnCombo);
 
 	}

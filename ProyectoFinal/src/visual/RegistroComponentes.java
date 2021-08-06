@@ -73,7 +73,7 @@ public class RegistroComponentes extends JFrame {
 	private JCheckBox chckbxSATA2;
 	private JComboBox cmbTipoConexion;
 	private JTextField txtDescuento;
-
+   
 	/**
 	 * Launch the application.
 	 */
