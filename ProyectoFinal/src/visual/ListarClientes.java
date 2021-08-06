@@ -12,6 +12,16 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.table.DefaultTableModel;
+
+import source.Cliente;
+import source.Componente;
+import source.Controladora;
+import source.DiscoDuro;
+import java.awt.event.WindowStateListener;
+import java.util.ArrayList;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowAdapter;
 
 public class ListarClientes extends JFrame {
 
@@ -22,8 +32,8 @@ public class ListarClientes extends JFrame {
 	private JTextField txtCedula;
 	private JTextField txtDireccion;
 	private JTextField txtCredito;
-	private JTextField textField_5;
-
+	private ArrayList <Cliente> misClientes = new ArrayList <Cliente>();
+	private Controladora miControladora = new Controladora();
 	/**
 	 * Launch the application.
 	 */
@@ -39,11 +49,33 @@ public class ListarClientes extends JFrame {
 			}
 		});
 	}
-
+	public void setControladora(Controladora controladora ) {
+    	miControladora = controladora;	
+    }
+  public void setClientes(ArrayList <Cliente> clientes) {
+	     misClientes = clientes;
+	    }
+	
 	/**
 	 * Create the frame.
 	 */
 	public ListarClientes() {
+		DefaultTableModel model = new DefaultTableModel();
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+			int contador = 0;
+			for (Cliente cliente: misClientes) {
+				 
+					model.insertRow(contador,
+							new Object[] { cliente.getCedula(),cliente.getNombre(),cliente.getApellido(),cliente.getCredito()});
+				}
+			}
+		});
+		addWindowStateListener(new WindowStateListener() {
+			public void windowStateChanged(WindowEvent arg0) {
+			}
+		});
 		setTitle("Clientes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1080, 684);
@@ -72,25 +104,16 @@ public class ListarClientes extends JFrame {
 		lblNewLabel_4.setBounds(518, 139, 141, 52);
 		contentPane.add(lblNewLabel_4);
 		
-		JLabel lblNewLabel_5 = new JLabel("New label");
-		lblNewLabel_5.setBounds(518, 248, 141, 52);
-		contentPane.add(lblNewLabel_5);
-		
-		table = new JTable();
-		table.setBounds(31, 316, 862, 319);
-		contentPane.add(table);
-		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		table = new JTable(model);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Cedula", "Nombre", "Apellido", "Direccion", "Credito"
 			}
-		});
-		btnNewButton.setBounds(926, 365, 130, 27);
-		contentPane.add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(926, 483, 130, 27);
-		contentPane.add(btnNewButton_1);
+		));
+		table.setBounds(31, 316, 1008, 319);
+		contentPane.add(table);
 		
 		txtNombre = new JTextField();
 		txtNombre.setBounds(185, 34, 190, 27);
@@ -101,25 +124,39 @@ public class ListarClientes extends JFrame {
 		txtApellido.setColumns(10);
 		txtApellido.setBounds(185, 152, 190, 27);
 		contentPane.add(txtApellido);
-		
+		txtCredito = new JTextField();
+		txtDireccion = new JTextField();
 		txtCedula = new JTextField();
+		txtCedula.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				for (Cliente cliente: misClientes) {
+				  if(cliente.getCedula().equals(txtCedula.getText()) == true) {
+					txtNombre.setText(cliente.getNombre());
+					txtApellido.setText(cliente.getApellido());
+					txtDireccion.setText(cliente.getDireccion());
+					txtCredito.setText(String.valueOf(cliente.getCredito()));
+				  }
+				  if(txtCedula.getText().equals("") == true) {
+					  txtNombre.setText("");
+						txtApellido.setText("");
+						txtDireccion.setText("");
+						txtCredito.setText("");	  
+				  }
+				}
+			}
+		});
 		txtCedula.setColumns(10);
 		txtCedula.setBounds(185, 261, 190, 27);
 		contentPane.add(txtCedula);
 		
-		txtDireccion = new JTextField();
+		 
 		txtDireccion.setColumns(10);
 		txtDireccion.setBounds(660, 34, 190, 27);
 		contentPane.add(txtDireccion);
 		
-		txtCredito = new JTextField();
+		 
 		txtCredito.setColumns(10);
 		txtCredito.setBounds(660, 156, 190, 27);
 		contentPane.add(txtCredito);
-		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(660, 261, 190, 27);
-		contentPane.add(textField_5);
 	}
 }
