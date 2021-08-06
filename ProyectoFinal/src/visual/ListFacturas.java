@@ -25,8 +25,7 @@ public class ListFacturas extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private ArrayList<Factura> misFacturas = new ArrayList<Factura>();
-	private Controladora miControladora = Controladora.getInstance();
+	
 
 	/**
 	 * Launch the application.
@@ -58,7 +57,7 @@ public class ListFacturas extends JFrame {
 				model.addColumn("Nombre");
 				model.addColumn("Fecha");
 				model.addColumn("Total");
-				for (Factura factura : misFacturas) {
+				for (Factura factura : Controladora.getInstance().getMisFacturas()) {
 					model.insertRow(contador,
 							new Object[] {factura.getCodFactura(),factura.getCliente().getCedula(), factura.getCliente().getNombre(),
 										  factura.getFecha(),factura.getTotal()});

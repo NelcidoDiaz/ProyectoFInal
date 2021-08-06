@@ -212,14 +212,29 @@ public class RegFactura extends JFrame {
 				case "Memoria Ram":
 					misColumnas.addAll(Arrays.asList("Cantidad de Memoria", "Tipo De Memoria"));
 					Url = "/visual/imagenes/MemoriaRam-1.jpg";
+					for (Componente component : Controladora.getInstance().getMisComponentes()) {
+						if (component instanceof MemoriaRam) {
+							componente.add(component);
+						}
+					}
 					break;
 				case "Tarjeta Madre":
 					misColumnas.addAll(Arrays.asList("Tipos de conexion", "Tipo De Conector", "Tipo De Memoria"));
 					Url = "/visual/imagenes/TarjetaMadre-1.jpg";
+					for (Componente component : Controladora.getInstance().getMisComponentes()) {
+						if (component instanceof TarjetaMadre) {
+							componente.add(component);
+						}
+					}
 					break;
 				case "Micro Procesador":
 					misColumnas.addAll(Arrays.asList("modelo", "socket", "velocidad"));
 					Url = "/visual/imagenes/MicroProcesador-1.jpg";
+					for (Componente component : Controladora.getInstance().getMisComponentes()) {
+						if (component instanceof MicroProcesador) {
+							componente.add(component);
+						}
+					}
 					break;
 				}
 				ElegirProductos productos = new ElegirProductos();
@@ -258,7 +273,6 @@ public class RegFactura extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				source.Factura factura = new source.Factura("12", miCliente, 100, date, componenteElegido);
 				Controladora.getInstance().insertarFactura(factura, 1);
-				System.out.println(factura.getTotal());
 				int contador = 0;
 				model.setRowCount(0);
 				for (Componente componenteElegido : componenteElegido) {

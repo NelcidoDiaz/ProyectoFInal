@@ -48,10 +48,7 @@ public class ElegirProductos extends JFrame {
 
 	
 	private String Url;
-	private ArrayList <Cliente> misClientes = new ArrayList <Cliente>();
 	private ArrayList<Componente> misComponentes =  new ArrayList <Componente>();
-	private Controladora miControladora = new Controladora();
-	private ArrayList<Componente> todosComponentes = new ArrayList <Componente>();
 	private ArrayList<Componente> componentesElegidos = new ArrayList <Componente>();
 	private String tipoDeComponentes;
 	private ArrayList<String> Columnas = new ArrayList<String>();
@@ -91,15 +88,7 @@ public class ElegirProductos extends JFrame {
 	public void setTipoDeComponente(String tipo) {
 		tipoDeComponentes = tipo;
 	}
-	/*public void setTodosComponentes(ArrayList<Componente> componentes) {
-		todosComponentes = componentes; 
-	}
-	 public void setControladora(Controladora controladora ) {
-	    	miControladora = controladora;	
-	    }
-	  public void setClientes(ArrayList <Cliente> clientes) {
-		     misClientes = clientes;
-		    }
+	
 	/**
 	 * Create the frame.
 	 */

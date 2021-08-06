@@ -98,7 +98,7 @@ public class Main extends JFrame {
 		mntmFacturar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				 RegFactura factura = new RegFactura();
-				// miControladora.insertarCliente(cliente);
+				  Controladora.getInstance().insertarCliente(cliente);
 				 factura.setVisible(true);
 				// factura.setControladora(miControladora);
 			}
