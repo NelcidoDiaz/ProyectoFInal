@@ -15,6 +15,7 @@ import java.awt.Font;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.TitledBorder;
 
+import source.Cliente;
 import source.Componente;
 import source.Controladora;
 import source.DiscoDuro;
@@ -31,6 +32,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
@@ -73,7 +75,13 @@ public class RegistroComponentes extends JFrame {
 	private JCheckBox chckbxSATA2;
 	private JComboBox cmbTipoConexion;
 	private JTextField txtDescuento;
-   
+	private ArrayList <Cliente> misClientes = new ArrayList <Cliente>();
+	private ArrayList<Componente> misComponentes =  new ArrayList <Componente>();
+	private Controladora miControladora = new Controladora();
+	
+	 public void setControladora(Controladora controladora ) {
+	    	miControladora = controladora;	
+	    }
 	/**
 	 * Launch the application.
 	 */
@@ -494,21 +502,22 @@ public class RegistroComponentes extends JFrame {
 					int cantMemoria = Integer.valueOf(txtCantMemoria.getText());
 					String tipoMemoria = txtTipoMemoriaRAM.getText();
 					MemoriaRam ram = new MemoriaRam(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, cantMemoria, tipoMemoria);
-					Controladora.getInstance().insertarComponente(ram);
+					miControladora.insertarComponente(ram);
 				}
 				else if(rdbtnDiscoDuro.isSelected()) {
 					String modelo = txtModeloDisk.getText();
 					int capAlmacen = Integer.valueOf(txtAlmacen.getText());
 					String tipoConexion = String.valueOf(cmbTipoConexion.getSelectedItem().toString());
 					DiscoDuro disk = new DiscoDuro(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, modelo, capAlmacen, tipoConexion);
-					Controladora.getInstance().insertarComponente(disk);
+					miControladora.insertarComponente(disk);
 				}
 				else if(rdbtnMicroprocesador.isSelected()) {
 					String modelo = txtModelo.getText();
 					String socket = txtSocket.getText();
 					float velcProcs = Float.parseFloat(txtVelocProces.getText());
 					MicroProcesador cpu = new MicroProcesador(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, modelo, socket, velcProcs);
-					Controladora.getInstance().insertarComponente(cpu);
+					miControladora.insertarComponente(cpu);
+					//	Controladora.getInstance().insertarComponente(cpu);
 				}
 				else if(rdbtnTarjetaMadre.isSelected()) {
 					String tipoConector = txtConector.getText();
@@ -516,7 +525,8 @@ public class RegistroComponentes extends JFrame {
 					String [] tipoConexion = new String [5];
 					String [] conexiones = llenarConexionTarjMadre(tipoConexion);
 					TarjetaMadre madre = new TarjetaMadre(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, tipoConector, tipoMemoria, conexiones);
-					Controladora.getInstance().insertarComponente(madre);
+					miControladora.insertarComponente(madre);
+					//Controladora.getInstance().insertarComponente(madre);
 				}
 				
 				JOptionPane.showMessageDialog(null, "Componente registrado", "Informacion",JOptionPane.INFORMATION_MESSAGE);
@@ -530,6 +540,7 @@ public class RegistroComponentes extends JFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main frame = new Main();
+				frame.setControladora(miControladora);
 				frame.setVisible(true);
 				dispose();
 			}

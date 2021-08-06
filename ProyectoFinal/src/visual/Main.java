@@ -150,6 +150,7 @@ public class Main extends JFrame {
 		mntmRegComponentes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegistroComponentes frame = new RegistroComponentes();
+				frame.setControladora(miControladora);
 				frame.setVisible(true);
 			}
 		});
