@@ -46,6 +46,35 @@ public class Main extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				FileInputStream control;
+				FileOutputStream control2;
+				ObjectInputStream controlRead;
+				ObjectOutputStream controlWrite;
+				try {
+					control = new FileInputStream ("Tienda.dat");
+					controlRead = new ObjectInputStream(control);
+					Controladora temp = (Controladora)controlRead.readObject();
+					Controladora.setControl(temp);
+					control.close();
+					controlRead.close();
+				} catch (FileNotFoundException e) {
+					try {
+						control2 = new  FileOutputStream("Tienda.dat");
+						controlWrite = new ObjectOutputStream(control2);
+						controlWrite.writeObject(Controladora.getInstance());
+						control2.close();
+						controlWrite.close();
+					} catch (FileNotFoundException e1) {
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+					}
+				} catch (IOException e) {
+					
+					
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				try {
 					Main frame = new Main();
 					frame.setVisible(true);
@@ -144,7 +173,7 @@ public class Main extends JFrame {
 			mnAdministrador.setEnabled(true);
 		}
 		else {
-			mnAdministrador.setEnabled(true);
+			mnAdministrador.setEnabled(false);
 		}
 		menuBar.add(mnAdministrador);
 		

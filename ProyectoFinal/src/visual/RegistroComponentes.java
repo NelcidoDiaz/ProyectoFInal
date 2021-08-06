@@ -40,6 +40,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JCheckBox;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.SpinnerNumberModel;
 
 public class RegistroComponentes extends JFrame {
 
@@ -208,16 +209,19 @@ public class RegistroComponentes extends JFrame {
 		txtPrecio.setColumns(10);
 		
 		spnCantReal = new JSpinner();
+		spnCantReal.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		spnCantReal.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		spnCantReal.setBounds(102, 127, 56, 20);
 		panel.add(spnCantReal);
 		
 		spnCantMin = new JSpinner();
+		spnCantMin.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		spnCantMin.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		spnCantMin.setBounds(240, 127, 56, 20);
 		panel.add(spnCantMin);
 		
 		spnCantMax = new JSpinner();
+		spnCantMax.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		spnCantMax.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		spnCantMax.setBounds(386, 128, 56, 20);
 		panel.add(spnCantMax);

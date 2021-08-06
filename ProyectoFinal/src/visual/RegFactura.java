@@ -33,6 +33,10 @@ import source.MicroProcesador;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 //import source.Factura;
 public class RegFactura extends JFrame {
@@ -54,6 +58,21 @@ public class RegFactura extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				FileInputStream control;
+				ObjectInputStream controlRead;
+				try {
+					control = new FileInputStream("Tienda.dat");
+					controlRead = new ObjectInputStream(control);
+					Controladora temp = (Controladora) controlRead.readObject();
+					Controladora.setControl(temp);
+					controlRead.close();
+				} catch (FileNotFoundException q) {
+				
+				} catch(IOException q) {
+					
+				}catch(ClassNotFoundException q) {
+					q.printStackTrace();
+				}
 				try {
 					RegFactura frame = new RegFactura();
 					frame.setVisible(true);

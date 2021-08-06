@@ -26,6 +26,10 @@ import source.Componente;
 import source.Controladora;
 
 import java.awt.event.WindowStateListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.MouseAdapter;
@@ -63,6 +67,22 @@ public class ElegirProductos extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				FileInputStream control;
+				ObjectInputStream controlRead;
+
+				try {
+					control = new FileInputStream("Tienda.dat");
+					controlRead = new ObjectInputStream(control);
+					Controladora temp = (Controladora) controlRead.readObject();
+					Controladora.setControl(temp);
+					controlRead.close();
+				} catch (FileNotFoundException q) {
+				
+				} catch(IOException q) {
+					
+				}catch(ClassNotFoundException q) {
+					q.printStackTrace();
+				}
 				try {
 					ElegirProductos frame = new ElegirProductos();
 					frame.setVisible(true);

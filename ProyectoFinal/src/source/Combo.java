@@ -1,10 +1,15 @@
 package source;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import exception.NotNegativeNumberExeption;
 
-public class Combo{
+public class Combo implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4319222390093661524L;
 	private String nombre;
 	private ArrayList<Componente> compCombo;
 	private float descuento;

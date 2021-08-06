@@ -123,6 +123,7 @@ public class ListarComponentes extends JFrame {
 		panel.add(btnCancelar);
 		
 		btnEliminar = new JButton("Eliminar");
+		btnEliminar.setEnabled(false);
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int option = JOptionPane.showConfirmDialog(null, "Esta seguro que desea eliminar este componente?","Confirmación",JOptionPane.WARNING_MESSAGE);
