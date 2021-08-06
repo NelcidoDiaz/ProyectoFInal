@@ -22,6 +22,12 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class RegEmpleado extends JFrame {
 
@@ -41,6 +47,35 @@ public class RegEmpleado extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				FileInputStream control;
+				FileOutputStream control2;
+				ObjectInputStream controlRead;
+				ObjectOutputStream controlWrite;
+				try {
+					control = new FileInputStream ("Tienda.dat");
+					controlRead = new ObjectInputStream(control);
+					Controladora temp = (Controladora)controlRead.readObject();
+					Controladora.setControl(temp);
+					control.close();
+					controlRead.close();
+				} catch (FileNotFoundException e) {
+					try {
+						control2 = new  FileOutputStream("Tienda.dat");
+						controlWrite = new ObjectOutputStream(control2);
+						controlWrite.writeObject(Controladora.getInstance());
+						control2.close();
+						controlWrite.close();
+					} catch (FileNotFoundException e1) {
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+					}
+				} catch (IOException e) {
+					
+					
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				try {
 					RegEmpleado frame = new RegEmpleado();
 					frame.setVisible(true);

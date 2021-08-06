@@ -190,7 +190,7 @@ public class RegCombos extends JFrame {
 		lblComponentes.setBounds(551, 14, 63, 14);
 		panel.add(lblComponentes);
 		
-		cmbComponentes = new JComboBox();
+		JComboBox cmbComponentes = new JComboBox();
 		cmbComponentes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String valor = cmbComponentes.getSelectedItem().toString();

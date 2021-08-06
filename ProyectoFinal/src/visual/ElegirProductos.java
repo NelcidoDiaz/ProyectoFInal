@@ -48,9 +48,9 @@ public class ElegirProductos extends JFrame {
 
 	
 	private String Url;
-	private ArrayList <Cliente> misClientes = new ArrayList <Cliente>();
-	private ArrayList<Componente> misComponentes =  new ArrayList <Componente>();
-	private Controladora miControladora = new Controladora();
+	private ArrayList <Cliente> misClientes = Controladora.getInstance().getMisClientes();
+	private ArrayList<Componente> misComponentes = Controladora.getInstance().getMisComponentes();
+	private Controladora miControladora = Controladora.getInstance();
 	private ArrayList<Componente> todosComponentes = new ArrayList <Componente>();
 	private ArrayList<Componente> componentesElegidos = new ArrayList <Componente>();
 	private String tipoDeComponentes;
@@ -220,6 +220,7 @@ public class ElegirProductos extends JFrame {
 		contentPane.add(label);
 
 		table = new JTable(model);
+		table.setModel(model);
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

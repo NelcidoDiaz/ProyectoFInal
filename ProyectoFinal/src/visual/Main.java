@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import source.Administrador;
 import source.Cliente;
 import source.Controladora;
+import source.Factura;
 import source.OrdenCompra;
 
 import javax.swing.JMenuBar;
@@ -37,7 +38,7 @@ public class Main extends JFrame {
 
 	private JPanel contentPane;
 	private Controladora miControladora = new Controladora();
-	private source.Factura miFactura =  null;
+	private Factura miFactura =  null;
 	private Cliente cliente = new Cliente("Nelcido","Diaz","123","calle13",null,12);
 	
 	/**
@@ -139,7 +140,7 @@ public class Main extends JFrame {
 			mnAdministrador.setEnabled(true);
 		}
 		else {
-			mnAdministrador.setEnabled(true);
+			mnAdministrador.setEnabled(false);
 		}
 		menuBar.add(mnAdministrador);
 		

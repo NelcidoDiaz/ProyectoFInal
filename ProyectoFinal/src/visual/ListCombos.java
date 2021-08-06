@@ -125,6 +125,8 @@ public class ListCombos extends JFrame {
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Main frame = new Main();
+				frame.setVisible(true);
 				dispose();
 			}
 		});
