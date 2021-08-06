@@ -32,8 +32,8 @@ public class ListarClientes extends JFrame {
 	private JTextField txtCedula;
 	private JTextField txtDireccion;
 	private JTextField txtCredito;
-	private ArrayList <Cliente> misClientes = new ArrayList <Cliente>();
-	private Controladora miControladora = new Controladora();
+	//private ArrayList <Cliente> misClientes = new ArrayList <Cliente>();
+	//private Controladora miControladora = new Controladora();
 	/**
 	 * Launch the application.
 	 */
@@ -49,12 +49,12 @@ public class ListarClientes extends JFrame {
 			}
 		});
 	}
-	public void setControladora(Controladora controladora ) {
+	/*public void setControladora(Controladora controladora ) {
     	miControladora = controladora;	
     }
   public void setClientes(ArrayList <Cliente> clientes) {
 	     misClientes = clientes;
-	    }
+	    }*/
 	
 	/**
 	 * Create the frame.
@@ -65,7 +65,7 @@ public class ListarClientes extends JFrame {
 			@Override
 			public void windowActivated(WindowEvent e) {
 			int contador = 0;
-			for (Cliente cliente: misClientes) {
+			for (Cliente cliente: Controladora.getInstance().getMisClientes()) {
 				 
 					model.insertRow(contador,
 							new Object[] { cliente.getCedula(),cliente.getNombre(),cliente.getApellido(),cliente.getCredito()});
@@ -129,7 +129,7 @@ public class ListarClientes extends JFrame {
 		txtCedula = new JTextField();
 		txtCedula.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				for (Cliente cliente: misClientes) {
+				for (Cliente cliente: Controladora.getInstance().getMisClientes()) {
 				  if(cliente.getCedula().equals(txtCedula.getText()) == true) {
 					txtNombre.setText(cliente.getNombre());
 					txtApellido.setText(cliente.getApellido());

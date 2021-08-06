@@ -34,7 +34,10 @@ public class RegEmpleado extends JFrame {
 	private JTextField txtCodAdmin;
 	private JTextField txtSueldo;
 	private JLabel lblCodAdministrador;
-
+	private Controladora miControladora = new Controladora();
+	 public void setControladora(Controladora controladora ) {
+	    	miControladora = controladora;	
+	    }
 	/**
 	 * Launch the application.
 	 */
@@ -164,10 +167,11 @@ public class RegEmpleado extends JFrame {
 		btnRegistrar.setBounds(226, 255, 89, 23);
 		panel.add(btnRegistrar);
 		
-		JButton btnCancelar = new JButton("cancelar");
+		JButton btnCancelar = new JButton("Salir");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main frame = new Main();
+				frame.setControladora(miControladora);
 				frame.setVisible(true);
 				dispose();
 			}

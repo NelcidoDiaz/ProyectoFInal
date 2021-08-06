@@ -37,14 +37,15 @@ public class RegCombos extends JFrame {
 	private JTextField txtDescuento;
 	private JTextField txtPrecio;
 	private ArrayList<Componente> componenteElegido = new ArrayList<Componente>();
-	private Controladora miControladora = new Controladora();
-	private ArrayList<Componente> misComponentes = new ArrayList<Componente>();
 	private JComboBox cmbComponentes;
 	private JTable table;
 
 	/**
 	 * Launch the application.
 	 */
+	public void getCombos() {
+	 
+	}
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -58,13 +59,7 @@ public class RegCombos extends JFrame {
 		});
 	}
 	
-	public void setComponentes(ArrayList<Componente> misComponentes) {
-		this.misComponentes = misComponentes;
-	}
-	
-	public void setControladora(Controladora control) {
-		miControladora = control;
-	}
+	 
 	
 	public void adquirirObjetos(ArrayList<Componente> componentes) {
 		componenteElegido = componentes;
@@ -164,7 +159,7 @@ public class RegCombos extends JFrame {
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				source.Combo combo = new source.Combo("Jugador Extremo", componenteElegido, 12);
-				miControladora.insertarCombo(combo);
+				Controladora.getInstance().insertarCombo(combo);
 				txtPrecio.setText(String.valueOf(combo.calcValComb()));
 				model.setRowCount(0);
 			}
@@ -202,7 +197,7 @@ public class RegCombos extends JFrame {
 					case "Disco Duro":
 						misColumnas.addAll(Arrays.asList("Modelo", "Almacenamiento", "tipoDeConexion"));
 						url = "/visual/imagenes/DiscoDuro-1.jpg";
-						for (Componente component : misComponentes) {
+						for (Componente component : Controladora.getInstance().getMisComponentes()) {
 							if (component instanceof DiscoDuro) {
 								componente.add(component);
 							}
@@ -227,8 +222,6 @@ public class RegCombos extends JFrame {
 
 				productos.setVisible(true);
 				productos.setTipoDeComponente(valor);
-				productos.setTodosComponentes(misComponentes);
-				productos.setControladora(miControladora);
 				productos.getColumns(misColumnas);
 				dispose();
 			}

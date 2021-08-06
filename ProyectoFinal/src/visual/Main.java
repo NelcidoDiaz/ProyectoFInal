@@ -98,9 +98,9 @@ public class Main extends JFrame {
 		mntmFacturar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				 RegFactura factura = new RegFactura();
-				 miControladora.insertarCliente(cliente);
+				// miControladora.insertarCliente(cliente);
 				 factura.setVisible(true);
-				 factura.setControladora(miControladora);
+				// factura.setControladora(miControladora);
 			}
 		});
 		mntmFacturar.addMouseListener(new MouseAdapter() {
@@ -202,6 +202,7 @@ public class Main extends JFrame {
 		mntmRegEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegEmpleado frame = new RegEmpleado();
+				frame.setControladora(miControladora);
 				frame.setVisible(true);
 			}
 		});

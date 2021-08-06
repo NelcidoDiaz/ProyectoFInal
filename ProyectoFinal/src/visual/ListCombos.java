@@ -113,8 +113,6 @@ public class ListCombos extends JFrame {
 				RegFactura factura = new RegFactura();
 				factura.adquirirObjetosComprados(aux.getCompCombo());
 				factura.setVisible(true);
-				factura.setComponentes(aux.getCompCombo());
-				factura.setControladora(miControladora);
 				dispose();
 			}
 		});

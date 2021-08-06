@@ -45,9 +45,7 @@ public class RegFactura extends JFrame {
 	private JTable tblElegidos;
 	private Cliente miCliente;
 	private ArrayList<Componente> componenteElegido = new ArrayList<Componente>();
-	private Controladora miControladora = new Controladora();
-	private ArrayList<Cliente> misClientes = new ArrayList<Cliente>();
-	private ArrayList<Componente> misComponentes = new ArrayList<Componente>();
+	 
 
 	// private
 	/**
@@ -71,21 +69,12 @@ public class RegFactura extends JFrame {
 		return null;
 	}
 
-	public void setComponentes(ArrayList<Componente> misComponentes) {
-		this.misComponentes = misComponentes;
-	}
+	 
 
 	public void selectComponets() {
 
 	}
-
-	public void setClientes(ArrayList<Cliente> clientes) {
-		misClientes = clientes;
-	}
-
-	public void setControladora(Controladora controladora) {
-		miControladora = controladora;
-	}
+ 
 
 	public void adquirirObjetosComprados(ArrayList<Componente> componentes) {
 		componenteElegido = componentes;
@@ -93,7 +82,7 @@ public class RegFactura extends JFrame {
 
 	private void borrar(String entrada) {
 		int contador = 0;
-		for (Componente componente : misComponentes) {
+		for (Componente componente : Controladora.getInstance().getMisComponentes()) {
 			if (componente.getNumeroDeSerie().equalsIgnoreCase(entrada) == true) {
 				// misComponentes.remove(contador);
 			}
@@ -174,7 +163,7 @@ public class RegFactura extends JFrame {
 		txtCedula = new JTextField();
 		txtCedula.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Cliente cliente = miControladora.buscCliente(txtCedula.getText());
+				Cliente cliente = Controladora.getInstance().buscCliente(txtCedula.getText());
 				if (cliente != null) {
 					txtNombre.setText(cliente.getNombre());
 					txtApellido.setText(cliente.getApellido());
@@ -201,7 +190,7 @@ public class RegFactura extends JFrame {
 
 		JComboBox comboBox_1 = new JComboBox();
 		DiscoDuro disco = new DiscoDuro("kwai", 19, "13", 12, 2, 4, 5, "1000", 1123, "ssd");
-		misComponentes.add(disco);
+		Controladora.getInstance().insertarComponente(disco);
 		comboBox_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String valor = comboBox_1.getSelectedItem().toString();
@@ -214,7 +203,7 @@ public class RegFactura extends JFrame {
 				case "Disco Duro":
 					misColumnas.addAll(Arrays.asList("Modelo", "Almacenamiento", "tipoDeConexion"));
 					Url = "/visual/imagenes/DiscoDuro-1.jpg";
-					for (Componente component : misComponentes) {
+					for (Componente component : Controladora.getInstance().getMisComponentes()) {
 						if (component instanceof DiscoDuro) {
 							componente.add(component);
 						}
@@ -239,9 +228,7 @@ public class RegFactura extends JFrame {
 
 				productos.setVisible(true);
 				productos.setTipoDeComponente(valor);
-				productos.setTodosComponentes(misComponentes);
-				productos.setClientes(misClientes);
-				productos.setControladora(miControladora);
+			 
 				productos.getColumns(misColumnas);
 				dispose();
 			}
@@ -270,7 +257,7 @@ public class RegFactura extends JFrame {
 		btnFacturar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				source.Factura factura = new source.Factura("12", miCliente, 100, date, componenteElegido);
-				miControladora.insertarFactura(factura, 1);
+				Controladora.getInstance().insertarFactura(factura, 1);
 				System.out.println(factura.getTotal());
 				int contador = 0;
 				model.setRowCount(0);

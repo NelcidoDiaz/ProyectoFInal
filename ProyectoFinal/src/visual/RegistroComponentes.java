@@ -502,22 +502,24 @@ public class RegistroComponentes extends JFrame {
 					int cantMemoria = Integer.valueOf(txtCantMemoria.getText());
 					String tipoMemoria = txtTipoMemoriaRAM.getText();
 					MemoriaRam ram = new MemoriaRam(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, cantMemoria, tipoMemoria);
-					miControladora.insertarComponente(ram);
+					//miControladora.insertarComponente(ram);
+					Controladora.getInstance().insertarComponente(ram);
 				}
 				else if(rdbtnDiscoDuro.isSelected()) {
 					String modelo = txtModeloDisk.getText();
 					int capAlmacen = Integer.valueOf(txtAlmacen.getText());
 					String tipoConexion = String.valueOf(cmbTipoConexion.getSelectedItem().toString());
 					DiscoDuro disk = new DiscoDuro(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, modelo, capAlmacen, tipoConexion);
-					miControladora.insertarComponente(disk);
+					//miControladora.insertarComponente(disk);
+					Controladora.getInstance().insertarComponente(disk);
 				}
 				else if(rdbtnMicroprocesador.isSelected()) {
 					String modelo = txtModelo.getText();
 					String socket = txtSocket.getText();
 					float velcProcs = Float.parseFloat(txtVelocProces.getText());
 					MicroProcesador cpu = new MicroProcesador(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, modelo, socket, velcProcs);
-					miControladora.insertarComponente(cpu);
-					//	Controladora.getInstance().insertarComponente(cpu);
+					//miControladora.insertarComponente(cpu);
+						Controladora.getInstance().insertarComponente(cpu);
 				}
 				else if(rdbtnTarjetaMadre.isSelected()) {
 					String tipoConector = txtConector.getText();
@@ -525,8 +527,8 @@ public class RegistroComponentes extends JFrame {
 					String [] tipoConexion = new String [5];
 					String [] conexiones = llenarConexionTarjMadre(tipoConexion);
 					TarjetaMadre madre = new TarjetaMadre(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, tipoConector, tipoMemoria, conexiones);
-					miControladora.insertarComponente(madre);
-					//Controladora.getInstance().insertarComponente(madre);
+					//miControladora.insertarComponente(madre);
+					Controladora.getInstance().insertarComponente(madre);
 				}
 				
 				JOptionPane.showMessageDialog(null, "Componente registrado", "Informacion",JOptionPane.INFORMATION_MESSAGE);
@@ -536,7 +538,7 @@ public class RegistroComponentes extends JFrame {
 		btnAniadir.setBounds(308, 413, 89, 23);
 		panel.add(btnAniadir);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		JButton btnCancelar = new JButton("Salir");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main frame = new Main();

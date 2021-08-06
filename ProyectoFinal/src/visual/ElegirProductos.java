@@ -48,10 +48,10 @@ public class ElegirProductos extends JFrame {
 
 	
 	private String Url;
-	private ArrayList <Cliente> misClientes = new ArrayList <Cliente>();
+	//private ArrayList <Cliente> misClientes = new ArrayList <Cliente>();
 	private ArrayList<Componente> misComponentes =  new ArrayList <Componente>();
-	private Controladora miControladora = new Controladora();
-	private ArrayList<Componente> todosComponentes = new ArrayList <Componente>();
+	//private Controladora miControladora = new Controladora();
+	//private ArrayList<Componente> todosComponentes = new ArrayList <Componente>();
 	private ArrayList<Componente> componentesElegidos = new ArrayList <Componente>();
 	private String tipoDeComponentes;
 	private ArrayList<String> Columnas = new ArrayList<String>();
@@ -91,7 +91,7 @@ public class ElegirProductos extends JFrame {
 	public void setTipoDeComponente(String tipo) {
 		tipoDeComponentes = tipo;
 	}
-	public void setTodosComponentes(ArrayList<Componente> componentes) {
+	/*public void setTodosComponentes(ArrayList<Componente> componentes) {
 		todosComponentes = componentes; 
 	}
 	 public void setControladora(Controladora controladora ) {
@@ -250,17 +250,12 @@ public class ElegirProductos extends JFrame {
 					factura.adquirirObjetosComprados(componentesElegidos);
 					factura.setVisible(true);
 			 
-					factura.setComponentes(todosComponentes);
-					factura.setClientes(misClientes);
-		     
-					factura.setControladora(miControladora);
 				}
 				else if(rdbtnCombo.isSelected()) {
 					RegCombos combo = new RegCombos();
 					combo.adquirirObjetos(componentesElegidos);
 					combo.setVisible(true);
-					combo.setComponentes(todosComponentes);
-					combo.setControladora(miControladora);
+					
 				}
 			 
 			 dispose();

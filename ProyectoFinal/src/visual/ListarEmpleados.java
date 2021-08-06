@@ -28,7 +28,7 @@ public class ListarEmpleados extends JFrame {
 	public static DefaultTableModel modelo;
 	public static Object[] fila;
 	private JTable table;
-
+	private Controladora miControladora = new Controladora();
 	/**
 	 * Launch the application.
 	 */
@@ -96,6 +96,8 @@ public class ListarEmpleados extends JFrame {
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Main frame = new Main();
+				frame.setControladora(miControladora);
 				dispose();
 			}
 		});
