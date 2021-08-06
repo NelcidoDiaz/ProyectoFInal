@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
+import java.awt.Font;
 
 public class Main extends JFrame {
 
@@ -96,7 +97,7 @@ public class Main extends JFrame {
 		JMenuItem mntmFacturar = new JMenuItem("Facturar");
 		mntmFacturar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				 Factura factura = new Factura();
+				 RegFactura factura = new RegFactura();
 				 miControladora.insertarCliente(cliente);
 				 factura.setVisible(true);
 				 factura.setControladora(miControladora);
@@ -111,6 +112,13 @@ public class Main extends JFrame {
 		mnFacturas.add(mntmFacturar);
 		
 		JMenuItem mntmListFacturas = new JMenuItem("Lista Facturas");
+		mntmListFacturas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListFacturas frame = new ListFacturas();
+				frame.setVisible(true);
+				dispose();
+			}
+		});
 		mnFacturas.add(mntmListFacturas);
 		
 		JMenu mnClientes = new JMenu("Clientes");
@@ -212,6 +220,7 @@ public class Main extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnAceptarPedido = new JButton("Aceptar\r\n Pedido");
+		btnAceptarPedido.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnAceptarPedido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean aceptado = false;

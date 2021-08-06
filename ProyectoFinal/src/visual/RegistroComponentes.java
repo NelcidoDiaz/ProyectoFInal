@@ -499,7 +499,7 @@ public class RegistroComponentes extends JFrame {
 				else if(rdbtnDiscoDuro.isSelected()) {
 					String modelo = txtModeloDisk.getText();
 					int capAlmacen = Integer.valueOf(txtAlmacen.getText());
-					String tipoConexion = String.valueOf(cmbTipoConexion.getSelectedItem());
+					String tipoConexion = String.valueOf(cmbTipoConexion.getSelectedItem().toString());
 					DiscoDuro disk = new DiscoDuro(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, modelo, capAlmacen, tipoConexion);
 					Controladora.getInstance().insertarComponente(disk);
 				}
@@ -529,6 +529,8 @@ public class RegistroComponentes extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Main frame = new Main();
+				frame.setVisible(true);
 				dispose();
 			}
 		});

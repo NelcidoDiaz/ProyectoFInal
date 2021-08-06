@@ -33,6 +33,7 @@ public class RegEmpleado extends JFrame {
 	private JTextField txtCodigo;
 	private JTextField txtCodAdmin;
 	private JTextField txtSueldo;
+	private JLabel lblCodAdministrador;
 
 	/**
 	 * Launch the application.
@@ -122,6 +123,18 @@ public class RegEmpleado extends JFrame {
 		panel.add(lblTipo);
 		
 		JComboBox cmbTipo = new JComboBox();
+		cmbTipo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(cmbTipo.getSelectedItem().toString().equals("Administrador")) {
+					txtCodAdmin.setEnabled(true);
+					lblCodAdministrador.setEnabled(true);
+				}
+				else {
+					txtCodAdmin.setEnabled(false);
+					lblCodAdministrador.setEnabled(false);
+				}
+			}
+		});
 		cmbTipo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Administrador", "Vendedor"}));
 		cmbTipo.setBounds(66, 163, 117, 20);
 		panel.add(cmbTipo);
@@ -154,22 +167,28 @@ public class RegEmpleado extends JFrame {
 		JButton btnCancelar = new JButton("cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Main frame = new Main();
+				frame.setVisible(true);
 				dispose();
 			}
 		});
 		btnCancelar.setBounds(325, 255, 89, 23);
 		panel.add(btnCancelar);
 		
-		JLabel lblCodAdministrador = new JLabel("Cod Administrador:");
+		lblCodAdministrador = new JLabel("Cod Administrador:");
+		lblCodAdministrador.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblCodAdministrador.setEnabled(false);
 		lblCodAdministrador.setBounds(10, 206, 98, 14);
 		panel.add(lblCodAdministrador);
 		
 		txtCodAdmin = new JTextField();
+		txtCodAdmin.setEnabled(false);
 		txtCodAdmin.setBounds(118, 203, 86, 20);
 		panel.add(txtCodAdmin);
 		txtCodAdmin.setColumns(10);
 		
 		JLabel lblSueldo = new JLabel("Sueldo:");
+		lblSueldo.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblSueldo.setBounds(10, 127, 46, 14);
 		panel.add(lblSueldo);
 		

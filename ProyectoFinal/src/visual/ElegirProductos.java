@@ -246,7 +246,7 @@ public class ElegirProductos extends JFrame {
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(rdbtnFactura.isSelected()) {
-					Factura factura = new Factura();
+					RegFactura factura = new RegFactura();
 					factura.adquirirObjetosComprados(componentesElegidos);
 					factura.setVisible(true);
 			 
@@ -270,7 +270,7 @@ public class ElegirProductos extends JFrame {
 		contentPane.add(btnSalir);
 		
 		JLabel lblSeleccion = new JLabel("Selecci\u00F3n:");
-		lblSeleccion.setBounds(721, 85, 55, 14);
+		lblSeleccion.setBounds(721, 85, 67, 14);
 		contentPane.add(lblSeleccion);
 		
 		rdbtnFactura = new JRadioButton("Factura");

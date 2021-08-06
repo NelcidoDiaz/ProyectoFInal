@@ -64,6 +64,7 @@ public class Factura implements Serializable {
 	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
+	
 
 	public ArrayList<Componente> getComponentes() {
 		return Componentes;
@@ -72,7 +73,16 @@ public class Factura implements Serializable {
 	public void setComponentes(ArrayList<Componente> componentes) {
 		Componentes = componentes;
 	}
-   public void guardar() {
+	
+   public Combo getCombos() {
+		return Combos;
+	}
+
+	public void setCombos(Combo combos) {
+		Combos = combos;
+	}
+
+public void guardar() {
 	   this.archivo = new Fichero("~/src/ficheros/facturas.txt");
    }
    

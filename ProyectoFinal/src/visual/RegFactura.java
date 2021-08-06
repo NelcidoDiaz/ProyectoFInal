@@ -35,7 +35,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 //import source.Factura;
-public class Factura extends JFrame {
+public class RegFactura extends JFrame {
 	LocalDate date = LocalDate.now();
 	private JPanel contentPane;
 	private JTextField txtNombre;
@@ -57,7 +57,7 @@ public class Factura extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Factura frame = new Factura();
+					RegFactura frame = new RegFactura();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -104,7 +104,7 @@ public class Factura extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Factura() {
+	public RegFactura() {
 		DefaultTableModel model = new DefaultTableModel();
 
 		addWindowListener(new WindowAdapter() {

@@ -110,7 +110,7 @@ public class ListCombos extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Combo aux = Controladora.getInstance().buscCombo(model.getValueAt(seleccion, 0).toString());
 				btnSeleccionado.setEnabled(false);
-				Factura factura = new Factura();
+				RegFactura factura = new RegFactura();
 				factura.adquirirObjetosComprados(aux.getCompCombo());
 				factura.setVisible(true);
 				factura.setComponentes(aux.getCompCombo());

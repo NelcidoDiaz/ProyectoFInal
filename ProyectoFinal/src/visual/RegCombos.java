@@ -174,6 +174,13 @@ public class RegCombos extends JFrame {
 		panel.add(btnCrear);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main frame = new Main();
+				frame.setVisible(true);
+				dispose();
+			}
+		});
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnCancelar.setBounds(659, 411, 89, 23);
 		panel.add(btnCancelar);
