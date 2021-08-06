@@ -76,8 +76,6 @@ public class RegistroComponentes extends JFrame {
 	private JCheckBox chckbxSATA2;
 	private JComboBox cmbTipoConexion;
 	private JTextField txtDescuento;
-	private ArrayList <Cliente> misClientes = new ArrayList <Cliente>();
-	private ArrayList<Componente> misComponentes =  new ArrayList <Componente>();
 	private Controladora miControladora = new Controladora();
 	
 	 public void setControladora(Controladora controladora ) {
@@ -502,41 +500,47 @@ public class RegistroComponentes extends JFrame {
 				int cantReal = (int) spnCantReal.getValue();
 				int cantMin = (int) spnCantMin.getValue();
 				int cantMax = (int) spnCantMax.getValue();
-				if(rdbtnMemoriaRam.isSelected()) {
-					int cantMemoria = Integer.valueOf(txtCantMemoria.getText());
-					String tipoMemoria = txtTipoMemoriaRAM.getText();
-					MemoriaRam ram = new MemoriaRam(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, cantMemoria, tipoMemoria);
-					//miControladora.insertarComponente(ram);
-					Controladora.getInstance().insertarComponente(ram);
-				}
-				else if(rdbtnDiscoDuro.isSelected()) {
-					String modelo = txtModeloDisk.getText();
-					int capAlmacen = Integer.valueOf(txtAlmacen.getText());
-					String tipoConexion = String.valueOf(cmbTipoConexion.getSelectedItem().toString());
-					DiscoDuro disk = new DiscoDuro(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, modelo, capAlmacen, tipoConexion);
-					//miControladora.insertarComponente(disk);
-					Controladora.getInstance().insertarComponente(disk);
-				}
-				else if(rdbtnMicroprocesador.isSelected()) {
-					String modelo = txtModelo.getText();
-					String socket = txtSocket.getText();
-					float velcProcs = Float.parseFloat(txtVelocProces.getText());
-					MicroProcesador cpu = new MicroProcesador(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, modelo, socket, velcProcs);
-					//miControladora.insertarComponente(cpu);
-						Controladora.getInstance().insertarComponente(cpu);
-				}
-				else if(rdbtnTarjetaMadre.isSelected()) {
-					String tipoConector = txtConector.getText();
-					String tipoMemoria = txtMemoria.getText();
-					String [] tipoConexion = new String [5];
-					String [] conexiones = llenarConexionTarjMadre(tipoConexion);
-					TarjetaMadre madre = new TarjetaMadre(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, tipoConector, tipoMemoria, conexiones);
-					//miControladora.insertarComponente(madre);
-					Controladora.getInstance().insertarComponente(madre);
+				if(!Controladora.getInstance().CompRegistrado(numSerie)) {
+					if(rdbtnMemoriaRam.isSelected()) {
+						int cantMemoria = Integer.valueOf(txtCantMemoria.getText());
+						String tipoMemoria = txtTipoMemoriaRAM.getText();
+						MemoriaRam ram = new MemoriaRam(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, cantMemoria, tipoMemoria);
+						//miControladora.insertarComponente(ram);
+						Controladora.getInstance().insertarComponente(ram);
+					}
+					else if(rdbtnDiscoDuro.isSelected()) {
+						String modelo = txtModeloDisk.getText();
+						int capAlmacen = Integer.valueOf(txtAlmacen.getText());
+						String tipoConexion = String.valueOf(cmbTipoConexion.getSelectedItem().toString());
+						DiscoDuro disk = new DiscoDuro(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, modelo, capAlmacen, tipoConexion);
+						//miControladora.insertarComponente(disk);
+						Controladora.getInstance().insertarComponente(disk);
+					}
+					else if(rdbtnMicroprocesador.isSelected()) {
+						String modelo = txtModelo.getText();
+						String socket = txtSocket.getText();
+						float velcProcs = Float.parseFloat(txtVelocProces.getText());
+						MicroProcesador cpu = new MicroProcesador(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, modelo, socket, velcProcs);
+						//miControladora.insertarComponente(cpu);
+							Controladora.getInstance().insertarComponente(cpu);
+					}
+					else if(rdbtnTarjetaMadre.isSelected()) {
+						String tipoConector = txtConector.getText();
+						String tipoMemoria = txtMemoria.getText();
+						String [] tipoConexion = new String [5];
+						String [] conexiones = llenarConexionTarjMadre(tipoConexion);
+						TarjetaMadre madre = new TarjetaMadre(marca, precio, numSerie, descuento, cantReal, cantMin, cantMax, tipoConector, tipoMemoria, conexiones);
+						//miControladora.insertarComponente(madre);
+						Controladora.getInstance().insertarComponente(madre);
+					}
+					
+					JOptionPane.showMessageDialog(null, "Componente registrado", "Informacion",JOptionPane.INFORMATION_MESSAGE);
+					limpiar();
+				} else {
+					JOptionPane.showMessageDialog(null,"No se puede repetir el Numero de Serie", "Error",JOptionPane.INFORMATION_MESSAGE);
 				}
 				
-				JOptionPane.showMessageDialog(null, "Componente registrado", "Informacion",JOptionPane.INFORMATION_MESSAGE);
-				limpiar();
+				
 			}
 		});
 		btnAniadir.setBounds(308, 413, 89, 23);

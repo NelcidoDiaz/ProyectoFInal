@@ -182,6 +182,20 @@ public class Controladora implements Serializable {
 	  return null;
 	}
 	
+	public boolean CompRegistrado(String numSerie) {
+		boolean existe = false;  
+		int i = 0;
+		while(!existe && i < misComponentes.size()) {
+			  if(misComponentes.get(i)!=null) {
+				  if(misComponentes.get(i).getNumeroDeSerie().equalsIgnoreCase(numSerie)) {
+					  existe = true;
+				  }
+			  }
+			
+		  }
+		  return existe;
+	}
+	
 	public Combo buscCombo(String nombre) {
 		for(Combo comb: misCombos) {
 			if(comb!=null) {
